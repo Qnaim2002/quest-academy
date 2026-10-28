@@ -1,0 +1,22 @@
+/* v36: story-choice twists, the treasure pick, tower builds, ascension, curses */
+.tw-chip.path{background:color-mix(in srgb,var(--surface) 70%,#6BD18B);color:var(--ink,#2A1F48)}
+.pathbtn{min-height:44px}
+.path-cards{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:12px 0}
+.path-card{flex:1 1 140px;max-width:220px;min-height:44px;cursor:pointer;text-align:center}
+.wline .gain.path{margin-left:6px}
+html[data-pixel="1"] :is(.tw-chip.path,.path-card){border-radius:0}
+/* tower builds, reroll, ascension, curse */
+.tw-builds{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0}
+.tw-bchip{padding:4px 12px;border-radius:999px;background:color-mix(in srgb,var(--surface) 88%,#8aa);font:800 .85rem var(--font-display)}
+.tw-bchip.t1{background:color-mix(in srgb,var(--surface) 55%,#6BD18B)}.tw-bchip.t2{background:color-mix(in srgb,var(--surface) 45%,#FFD166)}
+.tw-syn{list-style:none;margin:6px 0;padding:0;font-size:.9rem;text-align:center}.tw-syn li{margin:2px 0}
+.tw-tools{display:flex;justify-content:center;margin:8px 0}.tw-tools .btn{min-height:44px}
+.tw-bans{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.tw-ban{min-height:44px;min-width:56px}
+.tw-bansub{margin:4px 0}.tw-bd{position:absolute;top:6px;right:8px;font-style:normal;opacity:.8}
+.tw-card{position:relative}
+.tw-chip.asc{background:#FFD166}.tw-chip.curse{background:#B28CFF;color:#fff}.tw-chip.rule{background:#8fd6ff}
+.tw-banner.rule{background:color-mix(in srgb,var(--surface) 80%,#8fd6ff)}
+.tw-asc{margin:14px 0;text-align:center}.tw-asc.locked{opacity:.85}
+.tw-perks.curse{color:#B28CFF;font-weight:800}
+.tw-story.asc{font-weight:800}
+html[data-pixel="1"] :is(.tw-bchip,.tw-chip.asc,.tw-chip.curse,.tw-chip.rule){border-radius:0}

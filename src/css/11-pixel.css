@@ -1,0 +1,118 @@
+/* ================= v12: 32x32 pixel-art mode ================= */
+/* sprite sheets: 6 frames of 32px side by side (0-3 idle, 4 hurt, 5 attack) */
+.px-svg{overflow:hidden!important}
+svg.px-svg>svg{width:32px!important;height:32px!important;max-width:none!important;max-height:none!important;margin:0!important;animation:none!important;filter:none!important}
+.px-svg image{image-rendering:pixelated;image-rendering:crisp-edges}
+.px-sheet{animation:pxIdle .96s steps(4,end) infinite}
+.px-mon .px-sheet{animation-duration:1.2s}
+.px-owl .px-sheet{animation:pxOwl 3.6s infinite;animation-timing-function:step-end}
+@keyframes pxIdle{from{transform:translateX(0)}to{transform:translateX(-128px)}}
+@keyframes pxOwl{0%{transform:translateX(0)}30%{transform:translateX(-32px)}60%{transform:translateX(-64px)}92%{transform:translateX(-96px)}100%{transform:translateX(-96px)}}
+/* poses pick a frame */
+.pose-hurt .px-sheet,.sprite.ko .px-sheet{animation:none!important;transform:translateX(-128px)}
+.pose-attack .px-sheet,.pose-taunt .px-sheet,.sprite.windup .px-sheet{animation:none!important;transform:translateX(-160px)}
+.pose-cheer .px-sheet{animation-duration:.42s}
+.pose-cheer .px-svg,.pose-hop .px-svg{animation:pxJump .42s steps(3,end) 3}
+.pose-wave .px-svg,.pose-look .px-svg{animation:pxTilt .5s steps(2,end) 2}
+@keyframes pxJump{50%{transform:translateY(-12%)}}
+@keyframes pxTilt{50%{transform:translateX(3%)}}
+.item .px-sheet,.evo-art .px-sheet{animation:none!important}
+html[data-sensory="1"] .px-sheet,html[data-sensory="1"] .px-svg{animation:none!important}
+@media (prefers-reduced-motion:reduce){.px-sheet,.px-svg{animation:none!important}}
+
+/* ---------- pixel look for the whole game ---------- */
+html[data-pixel="1"]{--font-pixel:'Press Start 2P',ui-monospace,monospace;--pxl:#1d1830;--notch:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px),0 4px,4px 4px)}
+/* pixel font only for short, big labels so reading stays easy */
+html[data-pixel="1"] :is(.title,.sheet h2,.brief-head h2,.sj b,.subject b,.lvbadge,.tierchip,.vs-word,.vs-tag,.plate .pn,.fxnum,.win .gain,.cn-title h2,.cn-title small,.brand span,#coinVal,.zn-n,.orb b,.hs-info b,.dq b,.zhead>b,.lsec-h h3,.section,.pv-badge){font-family:var(--font-pixel);font-weight:400;letter-spacing:0;line-height:1.5}
+html[data-pixel="1"] .zhead>b small,html[data-pixel="1"] .sj small{font-family:var(--font-body);font-weight:700}
+html[data-pixel="1"] .title{font-size:1.02rem}
+html[data-pixel="1"] .sheet h2,html[data-pixel="1"] .brief-head h2{font-size:.86rem}
+html[data-pixel="1"] .sj b{font-size:.82rem}
+html[data-pixel="1"] .subject b{font-size:.62rem;line-height:1.6}
+html[data-pixel="1"] .zhead>b{font-size:.72rem}
+html[data-pixel="1"] .section,html[data-pixel="1"] .lsec-h h3{font-size:.78rem}
+html[data-pixel="1"] .brand span{font-size:.72rem}
+html[data-pixel="1"] #coinVal{font-size:.78rem}
+html[data-pixel="1"] .hs-info b,html[data-pixel="1"] .dq b{font-size:.66rem}
+html[data-pixel="1"] .lvbadge{font-size:.56rem;gap:8px}
+html[data-pixel="1"] .tierchip{font-size:.5rem}
+html[data-pixel="1"] .plate .pn{font-size:.54rem}
+html[data-pixel="1"] .vs-word{font-size:clamp(1.8rem,7vw,3.2rem);-webkit-text-stroke:0;text-shadow:4px 4px 0 #4A2600}
+html[data-pixel="1"] .vs-tag{font-size:.5rem}
+html[data-pixel="1"] .fxnum{font-size:1.1rem;text-shadow:3px 3px 0 rgba(0,0,0,.6)}
+html[data-pixel="1"] .fxnum.crit{font-size:1.5rem}
+html[data-pixel="1"] .win .gain{font-size:1.1rem}
+html[data-pixel="1"] .cn-title h2{font-size:clamp(1.2rem,5vw,2.2rem)}
+html[data-pixel="1"] .cn-title small{font-size:.62rem}
+html[data-pixel="1"] .zn-n{font-size:.7rem}
+html[data-pixel="1"] .orb b{font-size:.78rem}
+html[data-pixel="1"] .ans:not(.txt):not(.spell){font-family:var(--font-pixel);font-weight:400;font-size:clamp(1rem,4.4vw,1.5rem)}
+
+/* notched pixel corners + a 3px outline drawn inside the box */
+html[data-pixel="1"] :is(.btn,.chip:not(.static),.ans,.plate,.lvbadge,.tierchip,.qcard,.hint,.sj,.subject,.lcard,.zone,.herostrip,.enemy,.item,.speak,.lsec,.lpanel,.pcard,.fcard,.tcard,.card,.dom,.tile,.band,.petstrip,.pv-banner){border-radius:0!important;clip-path:var(--notch)}
+html[data-pixel="1"] :is(.btn,.chip:not(.static),.speak,.band){box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -6px 0 rgba(0,0,0,.22),inset 0 6px 0 rgba(255,255,255,.28)!important;border:0}
+html[data-pixel="1"] :is(.btn,.chip,.speak):active{box-shadow:inset 0 0 0 3px var(--pxl),inset 0 6px 0 rgba(0,0,0,.22)!important;transform:translateY(2px)!important}
+html[data-pixel="1"] :is(.sj,.subject,.lcard,.zone,.herostrip,.enemy,.item,.lsec,.pcard,.fcard,.tcard,.card,.dom,.tile,.petstrip,.pv-banner){box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -5px 0 rgba(0,0,0,.12)!important;border-color:transparent}
+html[data-pixel="1"] .sj{border-left:0;box-shadow:inset 12px 0 0 var(--c),inset 0 0 0 3px var(--pxl),inset 0 -5px 0 rgba(0,0,0,.12)!important}
+html[data-pixel="1"] .lpanel{box-shadow:inset 0 0 0 3px var(--kc,var(--pxl))!important;border:0}
+html[data-pixel="1"] .item.worn{outline:0;box-shadow:inset 0 0 0 4px var(--good)!important}
+html[data-pixel="1"] .item.trying{outline:0;box-shadow:inset 0 0 0 4px var(--primary)!important}
+html[data-pixel="1"] .sheet{border-radius:0;clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px);box-shadow:inset 0 0 0 4px var(--pxl)}
+html[data-pixel="1"] .sheet.cine{clip-path:none;box-shadow:none}
+html[data-pixel="1"] .mclose{border-radius:0;clip-path:var(--notch);border:0;box-shadow:inset 0 0 0 3px #fff,inset 0 -5px 0 #A4161A}
+html[data-pixel="1"] .nav button[aria-selected="true"]{border-radius:0;clip-path:var(--notch);box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -5px 0 rgba(0,0,0,.2)}
+html[data-pixel="1"] .coins,html[data-pixel="1"] .langbtn,html[data-pixel="1"] .fsbtn,html[data-pixel="1"] .musbtn,html[data-pixel="1"] .timer{border-radius:0;clip-path:var(--notch);box-shadow:inset 0 0 0 3px var(--pxl)}
+html[data-pixel="1"] .xp,html[data-pixel="1"] .zbar,html[data-pixel="1"] .think,html[data-pixel="1"] .gauge{border-radius:0;box-shadow:inset 0 0 0 2px var(--pxl)}
+html[data-pixel="1"] .xp i,html[data-pixel="1"] .zbar i,html[data-pixel="1"] .think i,html[data-pixel="1"] .gauge i{border-radius:0;background-image:repeating-linear-gradient(90deg,transparent 0 6px,rgba(0,0,0,.18) 6px 8px)}
+
+/* map nodes become pixel tiles */
+html[data-pixel="1"] .zgrid .orb{border-radius:0;box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -6px 0 rgba(0,0,0,.25),inset 0 6px 0 rgba(255,255,255,.3)!important}
+html[data-pixel="1"] .zgrid .lnode.locked .orb{border:0;box-shadow:inset 0 0 0 3px rgba(29,24,48,.35)!important;background:repeating-linear-gradient(45deg,var(--surface2) 0 6px,var(--surface) 6px 12px)}
+html[data-pixel="1"] .zgrid .lnode.next .orb{animation:pxBlink 1s steps(2,end) infinite}
+@keyframes pxBlink{50%{filter:brightness(1.25)}}
+html[data-pixel="1"] .stars i{font-family:var(--font-pixel);font-size:.6rem}
+
+/* battle: a square pixel frame, the pixel world behind, crisp scaling everywhere */
+html[data-pixel="1"] #battleView .stage{border-radius:0;border:4px solid var(--pxl);box-shadow:0 0 0 4px #F2C14E,0 0 0 8px var(--pxl),8px 12px 0 4px rgba(20,8,48,.35);image-rendering:pixelated;image-rendering:crisp-edges}
+html[data-pixel="1"] #battleView .stage::before{border-radius:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+html[data-pixel="1"] #battleView .stage::after{background:none}
+html[data-pixel="1"] #battleView :is(.scenery,.arena-sky,.arena-floor){display:none}
+html[data-pixel="1"] .wx{image-rendering:pixelated;image-rendering:crisp-edges}
+html[data-pixel="1"] #battleView .sprite.hero{width:clamp(108px,30%,200px)}
+html[data-pixel="1"] #battleView .sprite.monster{width:clamp(116px,31%,206px)}
+html[data-pixel="1"] #battleView .sprite.monster.boss{width:clamp(136px,36%,240px)}
+html[data-pixel="1"] #battleView .sprite.monster.big{width:clamp(156px,42%,280px)}
+html[data-pixel="1"] #battleView .sprite{bottom:52px}
+html[data-pixel="1"] .plate{border:0;box-shadow:inset 0 0 0 3px #F2C14E,inset 0 0 0 5px var(--pxl)}
+html[data-pixel="1"] .plate .bar{border-radius:0;border:0;box-shadow:inset 0 0 0 2px #000}
+html[data-pixel="1"] .plate .bar i,html[data-pixel="1"] .plate .bar .ghost,html[data-pixel="1"] .plate .bar::after{border-radius:0}
+html[data-pixel="1"] .plate .bar span{font-family:var(--font-pixel);font-size:.46rem;font-weight:400}
+html[data-pixel="1"] .pips i{border-radius:0}
+html[data-pixel="1"] .lvbadge,html[data-pixel="1"] .tierchip{border:0;box-shadow:inset 0 0 0 2px #F2C14E,inset 0 0 0 4px var(--pxl)}
+html[data-pixel="1"] .lvbadge b{border-radius:0}
+html[data-pixel="1"] #battleView .qcard{border:0;box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -6px 0 rgba(0,0,0,.08)!important}
+html[data-pixel="1"] #battleView .qcard .tag{border-radius:0;border:0;box-shadow:inset 0 0 0 2px #F2C14E;font-family:var(--font-pixel);font-weight:400;font-size:.5rem;padding:6px 10px}
+html[data-pixel="1"] #battleView .ans:not(.soft):not(.used):not(.right):not(.fogged){background:var(--primary);border:0;box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -8px 0 rgba(0,0,0,.25),inset 0 6px 0 rgba(255,255,255,.35)!important;text-shadow:3px 3px 0 rgba(0,0,0,.3)}
+html[data-pixel="1"] #battleView .ans:not(.fogged)::after{display:none}
+html[data-pixel="1"] #battleView .ans.fogged{box-shadow:inset 0 0 0 3px var(--pxl)!important}
+html[data-pixel="1"] .fog{filter:none;image-rendering:pixelated}
+html[data-pixel="1"] #battleView .ans.right{background:#2FB872;border:0;box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -8px 0 rgba(0,0,0,.25)!important}
+html[data-pixel="1"] #battleView .ans.soft{border:0;box-shadow:inset 0 0 0 3px rgba(29,24,48,.3)!important}
+html[data-pixel="1"] .hint{box-shadow:inset 0 0 0 3px var(--hint-ink)}
+html[data-pixel="1"] .vs-intro{background:linear-gradient(100deg,#17A99B 0 47%,var(--pxl) 47% 53%,#E5484D 53%)}
+html[data-pixel="1"] .vs-intro.big{background:linear-gradient(100deg,#167A8C 0 47%,#0a0014 47% 53%,#96002A 53%)}
+html[data-pixel="1"] .phasebar .pp,html[data-pixel="1"] .phase-banner{border-radius:0}
+html[data-pixel="1"] .phase-banner{font-family:var(--font-pixel);font-weight:400;font-size:.7rem;box-shadow:inset 0 0 0 3px #FFD166}
+html[data-pixel="1"] .fxring{border-radius:0}
+
+/* sprites sit crisp in every small spot too */
+html[data-pixel="1"] :is(.hs-av,.en-av,.wa-h,.wa-m,.vs-av,.wl-hero,.preview,.item-pv) svg{image-rendering:pixelated}
+html[data-pixel="1"] .preview{background:repeating-conic-gradient(var(--surface2) 0 25%,var(--surface) 0 50%) 0 0/16px 16px}
+html[data-pixel="1"] .preview::after{border-radius:0;filter:none;height:6px;background:rgba(0,0,0,.14)}
+
+/* story scenes */
+.cine .cn-pxbg.dull{filter:saturate(.15) brightness(.8)}
+html[data-pixel="1"] .cine .cn-sub{font-size:clamp(1rem,2.2vw + .45rem,1.55rem)}
+html[data-pixel="1"] .cine .cn-seg i{border-radius:0}
+
+/* v13: knights tab */

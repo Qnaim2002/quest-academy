@@ -1,0 +1,46 @@
+/* ================= v33 ================= */
+
+/* ---- big text must still fit the screen ----
+   1. nothing may push the page wider than the screen (grid and flex children can shrink, long words may break),
+   2. on narrow screens the biggest sizes grow a little less, and the top bar and bottom tabs (which hold fixed
+      content) grow only a little, so they stay in one row. */
+html,body{max-width:100%;overflow-x:hidden}
+.app,.app>*,.tab,.tab>.wrap,.wrap{min-width:0;max-width:100%}
+main :where(h1,h2,h3,p,b,small,span,button,li,label,.sub,.note){overflow-wrap:anywhere;hyphens:auto}
+main :where(.chip,.btn){max-width:100%}
+.pcards,.fcards,.tcards,.subjects,.sgrid,.cards,.dexgrid{grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr))}
+.topbar{flex-wrap:nowrap;min-width:0}
+.topbar>*{min-width:0}
+.tb-right{flex:0 1 auto;min-width:0;gap:6px}
+.coins,.timer{padding:4px 10px 4px 6px;font-size:calc(1.1rem / var(--fs,1) * (1 + (var(--fs,1) - 1) * .35))}
+@media (max-width:859px){.nav{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}}   /* v34: only the bottom bar; the side bar keeps one column */
+.nav button{min-width:0;overflow:hidden;font-size:calc(.78rem / var(--fs,1) * (1 + (var(--fs,1) - 1) * .3))}
+.nav button span:last-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:520px){
+  html{font-size:calc(var(--base,17px) * (1 + (var(--fs,1) - 1) * .62))}
+  .brand span{display:none}
+  html[data-pixel="1"] :is(.title,.sheet h2,.brief-head h2){font-size:calc(1rem * .9)}
+}
+@media (max-height:520px) and (orientation:landscape){
+  html{font-size:calc(var(--base,17px) * (1 + (var(--fs,1) - 1) * .62))}
+}
+
+/* ---- Pet Haven: pets you can buy look bright, not greyed out ---- */
+.pcard.locked{opacity:1}
+.pcard.locked .pet-svg{filter:saturate(.7) brightness(.95)}
+.hvcoins{font-weight:800;margin:0 0 8px}
+@media (max-width:520px){
+  .nav button{font-family:var(--font-body)!important;font-size:.68rem;letter-spacing:-.01em}
+  .nav button .ic{font-size:1.35rem}
+}
+
+/* ---- story buttons: one big Next button and one sound button, always in one row ---- */
+.cine .cn-ctl{flex-wrap:nowrap!important;gap:10px}
+.cine .cn-ctl .btn.big{flex:1 1 auto!important;order:0!important;min-width:0}
+.cine .cn-ctl .btn.icon{flex:none}
+
+/* ---- finisher light show (35) ---- */
+.vfxcv{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+
+/* ---- pets: the plush light is off in light mode (slow tablets) and in quiet mode ---- */
+html[data-lite="1"] .pet-lit, html[data-sensory="1"] .pet-lit { filter: none; }

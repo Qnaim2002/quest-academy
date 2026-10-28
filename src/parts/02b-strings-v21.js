@@ -1,0 +1,82 @@
+/* ================= v21 strings (English / Bahasa Melayu) ================= */
+Object.assign(STR, {
+  'st.loading': ['Opening the lesson…', 'Membuka pelajaran…'],
+  'st.loadFail': ['This lesson could not load. Check the connection and try again.', 'Pelajaran ini tidak dapat dibuka. Semak sambungan dan cuba lagi.']
+});
+Object.assign(STR, {
+  /* speech answers */
+  'voice.notSure': ['I heard “{w}”. Which one did you mean?', 'Saya dengar “{w}”. Yang mana maksud kamu?'],
+  'voice.denied': ['The microphone is blocked. Tap the answer you said.', 'Mikrofon disekat. Sentuh jawapan yang kamu sebut.'],
+  'voice.noSpeech': ['I did not hear anything. Try again, or tap the answer.', 'Saya tidak dengar apa-apa. Cuba lagi, atau sentuh jawapan.'],
+  'voice.noSupport': ['This browser cannot listen, so tap the answer you said. Nothing is recorded.', 'Pelayar ini tidak boleh mendengar, jadi sentuh jawapan yang kamu sebut. Tiada rakaman.'],
+  'voice.blocked': ['Listening is off. A grown-up can turn it on in the Parent Portal. Tap the answer you said.', 'Pendengaran dimatikan. Orang dewasa boleh menghidupkannya di Portal Ibu Bapa. Sentuh jawapan yang kamu sebut.'],
+  'voice.online': ['Listening uses the browser’s online speech service (allowed by a grown-up). Nothing is kept by Quest Academy.', 'Pendengaran menggunakan perkhidmatan suara dalam talian pelayar (dibenarkan oleh orang dewasa). Quest Academy tidak menyimpan apa-apa.'],
+  'voice.local': ['Listening happens on this device. Nothing is recorded or sent.', 'Pendengaran berlaku pada peranti ini. Tiada rakaman atau penghantaran.'],
+  /* tracing */
+  'tr.title': ['Tracing', 'Menyurih'], 'tr.tileSub': ['Letters and numbers', 'Huruf dan nombor'], 'tr.tag': ['✍️ Tracing', '✍️ Menyurih'],
+  'tr.sayLetter': ['Trace the letter {g}. Start at the green dot.', 'Surih huruf {g}. Mula di titik hijau.'],
+  'tr.sayNum': ['Trace the number {g}. Start at the green dot.', 'Surih nombor {g}. Mula di titik hijau.'],
+  'tr.s1': ['Put your finger on green dot 1.', 'Letak jari pada titik hijau 1.'], 'tr.s2': ['Follow the grey path without lifting your finger.', 'Ikut laluan kelabu tanpa mengangkat jari.'], 'tr.s3': ['Then do dot 2, and dot 3, in order.', 'Kemudian buat titik 2, dan titik 3, mengikut urutan.'],
+  'tr.clear': ['Start again', 'Mula semula'], 'tr.done': ['Done', 'Siap'], 'tr.next': ['Next', 'Seterusnya'],
+  'tr.great': ['Great tracing! ⭐', 'Surihan yang hebat! ⭐'], 'tr.almost': ['Almost! Follow the red dots too.', 'Hampir! Ikut titik merah juga.'], 'tr.start': ['Start at the green dot.', 'Mula di titik hijau.'],
+  'tr.aria': ['Tracing pad for {g}', 'Pad menyurih untuk {g}'], 'tr.coin': ['+1 🪙 for a new one!', '+1 🪙 untuk yang baharu!']
+});
+
+/* v21: family (several children), weekly summary, tricky questions, subjects, bedtime, listening, graphics, sound */
+Object.assign(STR, {
+  'fam.who': ['Who is playing?', 'Siapa yang bermain?'], 'fam.whoSub': ['Tap your name.', 'Sentuh nama kamu.'],
+  'fam.child': ['Child {n}', 'Anak {n}'], 'fam.hi': ['Hello, {n}!', 'Hai, {n}!'], 'fam.switch': ['Change player', 'Tukar pemain'],
+  'fam.stars': ['⭐ {n}', '⭐ {n}'], 'fam.new': ['New player', 'Pemain baharu'],
+  'fam.addHint': ['A grown-up can add another child in the Parent Portal.', 'Orang dewasa boleh menambah anak lain di Portal Ibu Bapa.'],
+  'fam.title': ['Children on this device', 'Anak-anak pada peranti ini'],
+  'fam.note': ['Each child has their own progress, coins, gear and settings. The parent code is shared.', 'Setiap anak ada kemajuan, syiling, peralatan dan tetapan sendiri. Kod ibu bapa dikongsi.'],
+  'fam.playing': ['Playing now', 'Sedang bermain'], 'fam.play': ['Play as {n}', 'Main sebagai {n}'],
+  'fam.rename': ['Save name', 'Simpan nama'], 'fam.remove': ['Remove', 'Buang'], 'fam.remove2': ['Tap again to remove {n} and all their progress', 'Sentuh lagi untuk membuang {n} dan semua kemajuannya'],
+  'fam.add': ['Add child', 'Tambah anak'], 'fam.namePh': ['Name', 'Nama'], 'fam.nameAria': ['Name of {n}', 'Nama {n}'],
+  'fam.added': ['{n} was added. Tap “Play as” when they are ready.', '{n} telah ditambah. Sentuh “Main sebagai” apabila dia sedia.'],
+  'fam.removed': ['{n} was removed.', '{n} telah dibuang.'], 'fam.renamed': ['Name saved.', 'Nama disimpan.'], 'fam.max': ['Up to 6 children on one device.', 'Paling banyak 6 anak pada satu peranti.'],
+  'fam.portalFor': ['Settings and progress for {n}', 'Tetapan dan kemajuan untuk {n}'],
+  'wk.title': ['This week', 'Minggu ini'], 'wk.none': ['No play recorded in the last 7 days yet.', 'Belum ada permainan dalam 7 hari lepas.'],
+  'wk.time': ['Time played', 'Masa bermain'], 'wk.days': ['Days played', 'Hari bermain'], 'wk.q': ['Questions', 'Soalan'], 'wk.first': ['Right first try', 'Betul kali pertama'],
+  'wk.best': ['💪 Strongest: {t}', '💪 Paling kuat: {t}'], 'wk.weak': ['🌱 Needs more practice: {t}', '🌱 Perlu lebih latihan: {t}'],
+  'wk.focus': ['🎯 Suggested focus: {t} ({s}). Short, happy sessions on this skill will help most.', '🎯 Fokus dicadangkan: {t} ({s}). Sesi pendek dan gembira untuk kemahiran ini paling membantu.'],
+  'wk.focusBtn': ['Make {s} today’s focus', 'Jadikan {s} fokus hari ini'], 'wk.noFocus': ['Keep going! Nothing stands out as hard this week.', 'Teruskan! Tiada yang nampak sukar minggu ini.'],
+  'wk.min': ['{n} min', '{n} min'], 'wk.hm': ['{h} h {m} min', '{h} j {m} min'], 'wk.barAria': ['{d}: {n} minutes', '{d}: {n} minit'],
+  'tq.title': ['Tricky questions', 'Soalan yang sukar'], 'tq.sub': ['Questions missed on the first try most often (at least twice).', 'Soalan yang paling kerap salah pada kali pertama (sekurang-kurangnya dua kali).'],
+  'tq.none': ['No tricky questions yet.', 'Belum ada soalan yang sukar.'], 'tq.row': ['missed first try {w} of {n} times', 'salah kali pertama {w} daripada {n} kali'],
+  'tq.clear': ['Clear question stats', 'Kosongkan statistik soalan'], 'tq.cleared': ['Question stats cleared.', 'Statistik soalan dikosongkan.'],
+  'sj.title': ['Subjects', 'Subjek'], 'sj.always': ['Available every day', 'Ada setiap hari'],
+  'sj.alwaysNote': ['Turn a subject off to hide it until you turn it on again.', 'Matikan subjek untuk menyembunyikannya sehingga anda menghidupkannya semula.'],
+  'sj.focus': ['Today’s focus', 'Fokus hari ini'], 'sj.focusNote': ['Pick subjects for today only. Tomorrow every subject is back.', 'Pilih subjek untuk hari ini sahaja. Esok semua subjek kembali.'],
+  'sj.focusClear': ['Clear today’s focus', 'Kosongkan fokus hari ini'], 'sj.needOne': ['Keep at least one subject on.', 'Biarkan sekurang-kurangnya satu subjek hidup.'],
+  'sj.banner': ['🎯 Today: {s}', '🎯 Hari ini: {s}'], 'sj.off': ['A grown-up turned this subject off for now. Try another one!', 'Orang dewasa mematikan subjek ini buat masa ini. Cuba subjek lain!'],
+  'sj.offTag': ['Off', 'Tutup'],
+  'bed.title': ['Bedtime', 'Waktu tidur'], 'bed.off': ['Off', 'Tutup'],
+  'bed.note': ['At bedtime the game stops until {w} in the morning. Only the parent code opens it again.', 'Pada waktu tidur permainan berhenti sehingga {w} pagi. Hanya kod ibu bapa boleh membukanya semula.'],
+  'bed.now': ['It is bedtime now.', 'Sekarang waktu tidur.'], 'bed.ok': ['Bedtime is paused until {t}.', 'Waktu tidur ditangguhkan sehingga {t}.'],
+  'bed.more': ['15 more minutes tonight', '15 minit lagi malam ini'], 'bed.skip': ['No bedtime tonight', 'Tiada waktu tidur malam ini'], 'bed.resume': ['Bedtime on again', 'Hidupkan semula waktu tidur'],
+  'bed.sheetT': ['Time for bed', 'Masa untuk tidur'], 'bed.sheetB': ['The castle is going to sleep. Sweet dreams, brave knight! See you in the morning.', 'Istana akan tidur. Mimpi indah, kesatria berani! Jumpa lagi pagi esok.'],
+  'bed.soon': ['Bedtime in 10 minutes.', 'Waktu tidur dalam 10 minit.'],
+  'mic.title': ['Spoken answers (microphone)', 'Jawapan lisan (mikrofon)'], 'mic.use': ['Listening: {s}', 'Mendengar: {s}'], 'mic.online': ['Online speech service: {s}', 'Perkhidmatan suara dalam talian: {s}'],
+  'mic.note': ['When this device can recognise speech by itself, Quest Academy uses that and the voice never leaves the device. Some browsers can only do it online: they send the voice to the browser maker’s speech service (for example Google or Apple) to turn it into text. That only happens if you allow it here. Quest Academy never records or stores audio.', 'Jika peranti ini boleh mengecam suara sendiri, Quest Academy menggunakannya dan suara tidak keluar dari peranti. Sesetengah pelayar hanya boleh melakukannya dalam talian: suara dihantar kepada perkhidmatan suara pembuat pelayar (contohnya Google atau Apple) untuk ditukar menjadi teks. Ini hanya berlaku jika anda membenarkannya di sini. Quest Academy tidak pernah merakam atau menyimpan audio.'],
+  'mic.st.local': ['✅ This device listens by itself (nothing is sent).', '✅ Peranti ini mendengar sendiri (tiada yang dihantar).'],
+  'mic.st.online': ['🌐 Listening uses the online speech service you allowed.', '🌐 Pendengaran menggunakan perkhidmatan suara dalam talian yang anda benarkan.'],
+  'mic.st.blocked': ['⏸️ Listening is off. Children tap the answer they said.', '⏸️ Pendengaran dimatikan. Kanak-kanak menyentuh jawapan yang disebut.'],
+  'mic.st.none': ['ℹ️ This browser cannot listen. Children tap the answer they said.', 'ℹ️ Pelayar ini tidak boleh mendengar. Kanak-kanak menyentuh jawapan yang disebut.'],
+  'mic.st.check': ['Checking this device…', 'Menyemak peranti ini…'],
+  'mic.st.unknown': ['Not checked yet whether this device can listen by itself.', 'Belum disemak sama ada peranti ini boleh mendengar sendiri.'], 'mic.check': ['Check this device', 'Semak peranti ini'],
+  'gq.title': ['Graphics quality', 'Kualiti grafik'], 'gq.auto': ['Auto', 'Auto'], 'gq.high': ['Full', 'Penuh'], 'gq.lite': ['Lite (faster)', 'Ringan (lebih laju)'],
+  'gq.note': ['Lite draws simpler monster glows and fewer idle frames, for older tablets and phones.', 'Ringan melukis cahaya raksasa yang lebih mudah dan bingkai yang lebih sedikit, untuk tablet dan telefon lama.'],
+  'gq.chose': ['Auto picked: {q} (sprite test {ms} ms).', 'Auto memilih: {q} (ujian sprite {ms} ms).'], 'gq.wait': ['Auto picks after a quick speed test.', 'Auto memilih selepas ujian kelajuan ringkas.'],
+  'cb.toggle': ['Colour-blind-safe colours: {s}', 'Warna mesra buta warna: {s}'],
+  'cb.note': ['Health bars, the boss fog, runes and the angry timer use blue and orange with patterns, so they never depend on red or green.', 'Bar nyawa, kabus bos, rune dan pemasa marah menggunakan biru dan oren dengan corak, jadi tidak bergantung pada merah atau hijau.'],
+  'vol.music': ['Music volume', 'Kelantangan muzik'], 'vol.sfx': ['Sound effects volume', 'Kelantangan kesan bunyi'], 'vol.voice': ['Voice volume', 'Kelantangan suara']
+,
+  'b.monster': ['the monster', 'raksasa'],
+  'sr.q': ['Question: {q}', 'Soalan: {q}'],
+  'sr.hit': ['Right! You hit {m} for {d}. Its health is {h} of {x}.', 'Betul! Kamu serang {m} sebanyak {d}. Nyawanya {h} daripada {x}.'],
+  'sr.crit': ['Super attack! You hit {m} for {d}. Its health is {h} of {x}.', 'Serangan super! Kamu serang {m} sebanyak {d}. Nyawanya {h} daripada {x}.'],
+  'sr.blocked': ['Right! But the rune shield blocked the hit on {m}.', 'Betul! Tetapi perisai rune menghalang serangan pada {m}.'],
+  'sr.hurt': ['{m} hit you for {d}. Your health is {h} of {x}.', '{m} serang kamu sebanyak {d}. Nyawa kamu {h} daripada {x}.'],
+  'sr.win': ['Victory! You beat {m} and earned {n} stars.', 'Menang! Kamu kalahkan {m} dan dapat {n} bintang.']
+});

@@ -1,0 +1,137 @@
+/* v37: the simple home. Learn / Play / Hero / Cards at the bottom, a 🔒 for grown-ups at the top,
+   Learn as three big steps, Play as three big buttons. */
+/* bottom bar: four big buttons (the other tabs stay in the page, hidden) */
+html .nav button[hidden]{display:none!important}
+html .nav{grid-template-columns:repeat(5,1fr);gap:4px}
+html .nav button{min-height:72px;font-size:.8rem;padding:0 2px}
+html .nav button .ic{font-size:1.8rem}
+@media (min-width:860px){html .nav{grid-template-columns:1fr;grid-auto-rows:88px}}
+@media (max-width:859px){html .nav{grid-template-columns:repeat(5,1fr)}}
+/* top bar: fewer things for a child to press */
+.langbtn,.brand span{display:none!important}
+.v37-lock{display:grid;place-items:center;flex:none;width:52px;height:52px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);font-size:1.5rem;line-height:1}
+.v37-lock:active{transform:scale(.94)}
+html[data-battle="1"] .v37-lock{display:none}
+/* a child does not pick an age: a grown-up sets it in the Parents area */
+.agebar,.diffbar{display:none!important}
+/* back arrow bar inside Play */
+.v37-sub{position:absolute;top:0;left:0;right:0;height:68px;z-index:3;display:flex;align-items:center;gap:12px;padding:6px var(--edge);background:var(--bg)}
+.v37-sub[hidden]{display:none}
+.v37-sub h1{font-size:1.5rem}
+html[data-v37sub="1"]:not([data-battle="1"]) .tab{top:68px}
+html[data-battle="1"] .v37-sub{display:none}
+.v37-back,.v37-arrow{display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:50%;background:var(--surface);color:var(--ink);box-shadow:var(--shadow);font-size:2.2rem;line-height:1;font-weight:800}
+.v37-back:active,.v37-arrow:active{transform:translateY(3px)}
+.v37-back span,.v37-arrow span{margin-top:-4px}
+/* the page */
+.wrap.v37{display:flex;flex-direction:column;gap:16px;min-height:100%;padding-top:12px}
+.v37-h{font-size:1.7rem;text-align:center;padding:0 4px}
+.v37-steps{display:flex;align-items:center;justify-content:center;flex:none}
+.v37-steps b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--surface2);color:var(--muted);font-size:1.15rem;font-family:var(--font-display)}
+.v37-steps b.on{background:var(--primary);color:var(--primary-ink);box-shadow:0 0 0 5px color-mix(in srgb,var(--primary) 28%,transparent)}
+.v37-steps b.done{background:var(--good);color:#fff}
+.v37-steps u{width:40px;height:6px;border-radius:4px;background:var(--surface2)}
+.v37-steps u.done{background:var(--good)}
+.v37-title{display:flex;align-items:center;gap:12px}
+.v37-title h1{font-size:1.6rem}
+/* step 1: four big tiles */
+.v37-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.v37-big{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:158px;padding:10px;border-radius:30px;background:var(--c);color:#fff;font-family:var(--font-display);font-size:1.4rem;font-weight:800;text-align:center;text-shadow:0 1px 0 rgba(0,0,0,.3);box-shadow:0 7px 0 rgba(0,0,0,.22),inset 0 -14px 24px rgba(0,0,0,.1)}
+.v37-big i{font-style:normal;font-size:3.7rem;line-height:1;text-shadow:none}
+.v37-big:active{transform:translateY(4px);box-shadow:0 3px 0 rgba(0,0,0,.22)}
+.v37-big.small{min-height:128px;font-size:1.15rem;border-radius:26px}
+.v37-big.small i{font-size:3rem}
+.v37-big.young{opacity:.6}
+/* paging */
+.v37-pager{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.v37-pdots{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.v37-pdots i{width:16px;height:16px;border-radius:50%;background:var(--surface2)}
+.v37-pdots i.on{background:var(--primary)}
+/* step 2: three big lessons */
+.v37-list{display:flex;flex-direction:column;gap:14px}
+.v37-lesson{display:flex;align-items:center;gap:16px;min-height:104px;padding:10px 18px;border-radius:28px;background:var(--surface);border:5px solid var(--line);box-shadow:var(--shadow);text-align:left;font-family:var(--font-display);font-size:1.3rem;font-weight:800;width:100%}
+.v37-lesson .le{font-size:2.9rem;line-height:1;flex:none}
+.v37-lesson .ln{flex:1;min-width:0}
+.v37-lesson .ln small{display:block;font-family:var(--font-body);font-size:.8rem;font-weight:700;color:var(--muted);margin-top:2px}
+.v37-lesson .ls{font-size:2rem;flex:none}
+.v37-lesson.next{border-color:var(--c)}
+.v37-lesson.done{opacity:.85}
+.v37-lesson.locked{opacity:.55;border-style:dashed}
+/* step 3 */
+.v37-ready{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.v37-ready h2{font-size:1.8rem}
+.v37-face{display:grid;place-items:center;width:150px;height:150px;border-radius:50%;background:var(--c);font-size:4.6rem;border:8px solid var(--surface);box-shadow:0 0 0 6px var(--c)}
+.v37-vs{display:flex;align-items:center;gap:16px;color:var(--muted);font-size:1.1rem}
+.v37-hero{display:block;width:104px;height:104px}.v37-hero svg{width:100%;height:100%}
+.v37-go{margin-top:auto}
+/* Play */
+.v37-hub{display:flex;align-items:center;gap:20px;min-height:132px;padding:14px 24px;border-radius:32px;background:var(--c);color:#fff;font-family:var(--font-display);font-size:1.9rem;font-weight:800;text-align:left;text-shadow:0 1px 0 rgba(0,0,0,.3);box-shadow:0 7px 0 rgba(0,0,0,.22)}
+.v37-hub i{font-style:normal;font-size:4.2rem;line-height:1;text-shadow:none}
+.v37-hub small{display:block;font-family:var(--font-body);font-size:1rem;font-weight:700;opacity:.95;margin-top:2px}
+.v37-hub:active{transform:translateY(4px)}
+html[data-pixel="1"] :is(.v37-big,.v37-hub,.v37-lesson,.v37-face,.v37-steps b,.v37-back,.v37-arrow,.v37-lock){border-radius:0}
+@media (prefers-reduced-motion:reduce){.v37-big:active,.v37-hub:active{transform:none}}
+
+/* ===== the lesson page: one step at a time ===== */
+#lessonSheet[data-v37]{padding-bottom:0}
+#lessonSheet[data-v37] .lhead{margin-bottom:6px}
+#lessonSheet[data-v37] .lhead h2{font-size:1.45rem}
+#lessonSheet[data-v37] .v37-s-hide{display:none!important}
+#lessonSheet[data-v37="try"] :is(.v37-s-learn,.v37-s-q,.v37-s-done),
+#lessonSheet[data-v37="done"] :is(.v37-s-learn,.v37-s-q,.v37-s-try),
+#lessonSheet[data-v37^="learn"] :is(.v37-s-try,.v37-s-done),
+#lessonSheet[data-v37="learn"] .v37-s-q{display:none!important}
+/* a card: big words, no tabs, no small print; the arrows below do the moving */
+#lessonSheet[data-v37] .lsec.learn .lsec-h,#lessonSheet[data-v37] .lsteps,#lessonSheet[data-v37] .lc-nav,
+#lessonSheet[data-v37] .lpanel>header b,#lessonSheet[data-v37] .lpanel>header small{display:none}
+#lessonSheet[data-v37] .lsec.learn{border:0;background:none;box-shadow:none;padding:0;margin:0}
+#lessonSheet[data-v37] .lsec.learn .lpanel{min-height:46vh;display:flex;flex-direction:column;gap:12px;padding:14px}
+#lessonSheet[data-v37] .lsec.learn .lpanel>header{display:flex;justify-content:flex-end}
+#lessonSheet[data-v37] .lsec.learn .speak{width:60px;height:60px;font-size:1.6rem}
+#lessonSheet[data-v37] .lp-lines{display:flex;flex-direction:column;gap:12px}
+#lessonSheet[data-v37] .lp-lines li{font-size:1.3rem;line-height:1.4;padding:14px 16px}
+#lessonSheet[data-v37] .lp-one{font-size:1.5rem;text-align:center}
+/* the Try step and the Done step */
+#lessonSheet[data-v37="try"] .lsec-h h3{font-size:1.2rem}
+#lessonSheet[data-v37="done"]{min-height:60vh}
+#lessonSheet[data-v37="done"] .btn.good.big{min-height:96px;font-size:1.5rem;margin-top:24px!important}
+/* the bar with the big arrows, always at the bottom of the sheet */
+.v37-lnav{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px -4px 0;padding:12px 4px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--surface) 78%,transparent)}
+.v37-lnav .v37-arrow{width:64px;height:64px;border-radius:32px;font-size:2.6rem}
+.v37-lnav .v37-arrow.go{background:var(--primary);color:var(--primary-ink)}
+.v37-lnav .v37-arrow:disabled{opacity:.3;box-shadow:none}
+.v37-lnav .v37-pdots{flex:1;display:flex;gap:5px;justify-content:center;flex-wrap:nowrap;min-width:0}
+.v37-lnav .v37-pdots i{width:10px;height:10px;flex:none}
+.v37-lnav .v37-pdots i.seen{background:var(--good)}
+.v37-finish{min-height:64px;min-width:0;padding:0 14px;font-size:1.1rem}
+html[data-pixel="1"] .v37-lnav .v37-arrow{border-radius:0}
+
+/* v37.2: the practice card is a big question and big answers (no arena, no extra buttons, no small print) */
+#lessonSheet[data-v37] .prac .pr-arena,#lessonSheet[data-v37] .prac>.sub,#lessonSheet[data-v37] .prac .btn[data-v="quiz"],#lessonSheet[data-v37] .prac .btn[data-act="pracGo"],#lessonSheet[data-v37] .prac .pr-fb:empty{display:none}
+#lessonSheet[data-v37] .pr-q p{font-size:1.4rem;line-height:1.35}
+#lessonSheet[data-v37] .pr-opts{grid-template-columns:1fr;gap:12px}
+#lessonSheet[data-v37] .pr-ans{min-height:68px;font-size:1.4rem}
+#lessonSheet[data-v37] .prac .btn.big{min-height:76px;font-size:1.4rem}
+#lessonSheet[data-v37] .lp-lines li:first-child{font-size:1.45rem}
+
+.pk-bar{height:20px;border-radius:12px;background:var(--surface2);overflow:hidden;margin:6px 0 14px}.pk-bar i{display:block;height:100%;background:var(--primary);border-radius:12px}
+.perksheet .pk-list li{grid-template-columns:auto 1fr auto;min-height:64px;font-size:1.15rem}.perksheet .pk-ic{font-size:1.9rem}
+/* v37.2: pets fill their pictures; stage dots and a clear XP count */
+.petstrip .pe{width:96px}.pcard .pet-svg{width:104px}.item-pv .pv-pet .pet-svg{width:96%}
+.pstages{display:flex;gap:6px;margin:3px 0}.pstages i{width:14px;height:14px;border-radius:50%;background:var(--surface2);border:2px solid var(--primary)}.pstages i.on{background:var(--primary)}
+@media(max-width:520px){.pcard .pet-svg{width:78px}}
+/* v37.2: a simpler Hero tab (one picture, three big tabs, no small print) and colourful Battle cards */
+#tab-armory .title,#tab-armory .arm-top .sub,#tab-armory .arm-top .statline .stat:not(:first-child),#tab-armory .armtabs [data-v="me"],#tab-armory .slotbar [data-v="pet"],#tab-armory .petstrip,#tab-armory .item>small{display:none}
+#tab-armory .armtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#tab-armory .armtabs .chip{min-height:64px;font-size:1rem;flex-direction:column;gap:2px;padding:6px 4px}
+#tab-armory .arm-top{grid-template-columns:minmax(0,150px) 1fr}
+#tab-armory .arm-top h2{font-size:1.4rem!important}
+#tab-armory .arm-top .stat{font-size:1.1rem;padding:8px 14px}
+#tab-armory .slotbar .chip{min-height:56px;font-size:1rem}
+/* colourful Battle cards: each subject card is filled with its own colour */
+#tab-adventure .sj{background:linear-gradient(160deg,var(--c),color-mix(in srgb,var(--c) 62%,#000));color:#fff;border-color:transparent;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+#tab-adventure .sj b,#tab-adventure .sj small,#tab-adventure .sj .sj-st{color:#fff}
+#tab-adventure .sj .xp,#tab-adventure .sj .sj-bar{background:rgba(0,0,0,.3)}
+#tab-adventure .sj .em{font-size:2.6rem}
+#tab-adventure .sj.off{filter:grayscale(.7);opacity:.7}
+html[data-pixel="1"] #tab-adventure .sj{background:linear-gradient(160deg,var(--c),color-mix(in srgb,var(--c) 62%,#000))!important}

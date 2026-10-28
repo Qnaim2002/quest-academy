@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quest Academy question maker</title>
+<style>
+:root{--bg:#fff8e6;--card:#fff;--ink:#2b1d3a;--muted:#6f6285;--line:#e5d8b8;--pri:#ff8a1f;--ok:#1a8f55;--err:#d4303a;--warn:#b86e00}
+@media (prefers-color-scheme:dark){:root{--bg:#14112e;--card:#1e1a40;--ink:#ece8ff;--muted:#a79fd0;--line:#3a3466;--pri:#ffb84d;--ok:#4fe3a0;--err:#ff7b82;--warn:#ffc15a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:16px 20px;border-bottom:3px solid var(--line)}
+h1{margin:0;font-size:1.4rem}
+header p{margin:4px 0 0;color:var(--muted)}
+main{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;padding:16px 20px;max-width:1200px;margin:0 auto}
+@media (max-width:860px){main{grid-template-columns:1fr}}
+section{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px}
+h2{margin:0 0 10px;font-size:1.1rem}
+label{display:block;font-weight:700;font-size:.85rem;margin:8px 0 3px}
+input,select,textarea{width:100%;font:inherit;color:inherit;background:transparent;border:2px solid var(--line);border-radius:10px;padding:8px 10px}
+input:focus,select:focus{outline:3px solid var(--pri);outline-offset:1px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.row.two{grid-template-columns:1fr 1fr}
+.lang{border-left:6px solid var(--pri);padding-left:10px;margin:12px 0}
+.lang.ms{border-left-color:#4fa8e8}
+.lang h3{margin:0 0 4px;font-size:.95rem}
+button{font:inherit;font-weight:800;border:0;border-radius:12px;padding:10px 16px;background:var(--pri);color:#2b1d3a;cursor:pointer}
+button.ghost{background:transparent;border:2px solid var(--line);color:var(--ink)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.msg{margin:8px 0 0;padding:0;list-style:none;font-size:.9rem}
+.msg li{padding:4px 8px;border-radius:8px;margin:3px 0}
+.msg .e{background:color-mix(in srgb,var(--err) 16%,transparent);color:var(--err)}
+.msg .w{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.msg .g{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+td,th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.small{color:var(--muted);font-size:.85rem}
+.count{font-weight:800}
+</style>
+</head>
+<body>
+<header><h1>🧩 Quest Academy question maker</h1><p>Type a question in English and Malay. It checks your work as you type. Press <b>Add to list</b>, then <b>Download CSV</b> and give the file to the person who runs <code>npm run author -- import</code>.</p></header>
+<main>
+<section aria-labelledby="h-new">
+  <h2 id="h-new">New question</h2>
+  <div class="row">
+    <div><label for="subject">Subject</label><select id="subject"></select></div>
+    <div><label for="level">Level</label><select id="level"><option value="1">1 · easier (ages 4–5)</option><option value="2">2 · middle (ages 5–6)</option><option value="3">3 · harder (ages 6–7)</option></select></div>
+    <div><label for="topic">Topic</label><select id="topic"></select></div>
+  </div>
+  <label for="emoji">Picture (one emoji, optional)</label><input id="emoji" maxlength="4" placeholder="🐘" style="max-width:120px">
+  <div class="lang en"><h3>English</h3>
+    <label for="question_en">Question</label><input id="question_en" autocomplete="off">
+    <label for="answer_en">Right answer</label><input id="answer_en" autocomplete="off">
+    <div class="row"><div><label for="wrong1_en">Wrong answer 1</label><input id="wrong1_en" autocomplete="off"></div><div><label for="wrong2_en">Wrong answer 2</label><input id="wrong2_en" autocomplete="off"></div><div><label for="wrong3_en">Wrong answer 3</label><input id="wrong3_en" autocomplete="off"></div></div>
+  </div>
+  <div class="lang ms"><h3>Bahasa Melayu</h3>
+    <label for="question_ms">Soalan</label><input id="question_ms" autocomplete="off" lang="ms">
+    <label for="answer_ms">Jawapan betul</label><input id="answer_ms" autocomplete="off" lang="ms">
+    <div class="row"><div><label for="wrong1_ms">Jawapan salah 1</label><input id="wrong1_ms" autocomplete="off" lang="ms"></div><div><label for="wrong2_ms">Jawapan salah 2</label><input id="wrong2_ms" autocomplete="off" lang="ms"></div><div><label for="wrong3_ms">Jawapan salah 3</label><input id="wrong3_ms" autocomplete="off" lang="ms"></div></div>
+  </div>
+  <ul class="msg" id="msg" aria-live="polite"></ul>
+  <div class="bar"><button id="add" disabled>➕ Add to list</button><button class="ghost" id="clearForm">Clear the form</button></div>
+</section>
+<section aria-labelledby="h-list">
+  <h2 id="h-list">Your list <span class="count" id="count">0</span></h2>
+  <p class="small">The list stays in this browser until you clear it.</p>
+  <div class="bar" style="margin:0 0 10px"><button id="dl">⬇️ Download CSV</button><button class="ghost" id="copy">Copy CSV</button><label class="ghost" style="margin:0;display:inline-block;border:2px solid var(--line);border-radius:12px;padding:8px 14px;cursor:pointer">Load CSV<input id="load" type="file" accept=".csv,text/csv" hidden></label><button class="ghost" id="clearAll">Clear list</button></div>
+  <table><thead><tr><th>Subject</th><th>Question</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+  <p class="small" id="empty">Nothing yet.</p>
+</section>
+</main>
+<script>
+const DATA = /*DATA*/null;
+const COLS = ['subject','level','topic','emoji','question_en','answer_en','wrong1_en','wrong2_en','wrong3_en','question_ms','answer_ms','wrong1_ms','wrong2_ms','wrong3_ms'];
+const $ = (id) => document.getElementById(id);
+const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim().replace(/[.,!?'"…:;]+/g, '').replace(/\s+/g, ' ').trim();
+const clean = (s) => String(s || '').replace(/\s+/g, ' ').trim();
+const EN_STOP = new Set(['the','and','which','what','how','is','are','of','to','you','your','with','many','from','does','this','that','there','they','when','where','who','why','should','would','can','will']);
+let rows = []; try { rows = JSON.parse(localStorage.getItem('qa-author-rows') || '[]'); } catch (e) { rows = []; }
+const save = () => { try { localStorage.setItem('qa-author-rows', JSON.stringify(rows)); } catch (e) {} };
+
+/* subjects and topics */
+const sub = $('subject');
+DATA.subjects.forEach((s) => sub.add(new Option((DATA.names.__subj[s] || s) + ' (' + s + ')', s)));
+function fillTopics() { const t = $('topic'); t.innerHTML = ''; (DATA.names[sub.value] || []).forEach(([k, n]) => t.add(new Option(n + ' (' + k + ')', k))); }
+sub.addEventListener('change', () => { fillTopics(); check(); }); fillTopics();
+
+function read() { const r = {}; COLS.forEach((c) => { r[c] = clean($(c).value); }); return r; }
+function lint(r, skipDup) {
+  const out = [];
+  const E = (m) => out.push(['e', m]), W = (m) => out.push(['w', m]);
+  const need = ['question_en','answer_en','wrong1_en','wrong2_en','wrong3_en','question_ms','answer_ms','wrong1_ms','wrong2_ms','wrong3_ms'];
+  const gaps = need.filter((c) => !r[c]);
+  if (gaps.length) E('Still to fill in: ' + gaps.length + ' box' + (gaps.length > 1 ? 'es' : ''));
+  ['en', 'ms'].forEach((lang) => {
+    const L = lang === 'en' ? 'English' : 'Malay';
+    const all = [r['answer_' + lang], r['wrong1_' + lang], r['wrong2_' + lang], r['wrong3_' + lang]].filter(Boolean).map(norm);
+    if (new Set(all).size !== all.length) E(L + ': the right answer and the three wrong answers must all be different.');
+    if (r['question_' + lang] && r['question_' + lang].length < 8) E(L + ': the question is very short.');
+    if (r['question_' + lang] && !/[?:.…!)]$/.test(r['question_' + lang]) && !/___/.test(r['question_' + lang])) W(L + ': the question does not end with ? or a full stop.');
+  });
+  if (!skipDup) {
+    const ke = norm(r.question_en), km = norm(r.question_ms);
+    if (ke && DATA.existing.en[ke]) E('This English question already exists (' + DATA.existing.en[ke] + ').');
+    if (km && DATA.existing.ms[km]) E('This Malay question already exists (' + DATA.existing.ms[km] + ').');
+    rows.forEach((x, i) => { if (ke && norm(x.question_en) === ke) E('This English question is already on your list (row ' + (i + 1) + ').'); if (km && norm(x.question_ms) === km) E('This Malay question is already on your list (row ' + (i + 1) + ').'); });
+  }
+  [['question', r.question_en, r.question_ms], ['answer', r.answer_en, r.answer_ms], ['wrong 1', r.wrong1_en, r.wrong1_ms], ['wrong 2', r.wrong2_en, r.wrong2_ms], ['wrong 3', r.wrong3_en, r.wrong3_ms]].forEach(([k, en, ms]) => {
+    if (!en || !ms) return;
+    if (norm(en) === norm(ms) && /[a-z]{3,}/i.test(en) && !/^[A-Z][\p{L}'’.-]*( [A-Z][\p{L}'’.-]*){0,3}$/u.test(en) && r.subject !== 'bm' && r.subject !== 'en') W('Malay ' + k + ' is the same as the English. Is it translated?');
+    else { const words = norm(ms).replace(/[^a-z\s'’-]/g, ' ').split(/\s+/).filter(Boolean), hit = [...new Set(words.filter((w) => EN_STOP.has(w)))]; if (r.subject !== 'en' && (hit.length >= 2 || (hit.length === 1 && words.length <= 4))) W('Malay ' + k + ' still has English words: ' + hit.join(', ') + '.'); }
+    if (k === 'question') { const ne = en.match(/\d+/g) || [], nm = ms.match(/\d+/g) || []; if (nm.some((x) => ne.indexOf(x) < 0)) W('The Malay question has a number that the English question does not.'); if (/\?/.test(en) && !/\?/.test(ms) && !/(…|\.\.\.)\s*$/.test(ms)) W('English asks a question (?), Malay has no ?.'); }
+  });
+  return out;
+}
+function check() {
+  const r = read(), res = lint(r), errs = res.filter((x) => x[0] === 'e').length;
+  $('msg').innerHTML = res.length ? res.map(([t, m]) => '<li class="' + t + '">' + (t === 'e' ? '⛔ ' : '⚠️ ') + m.replace(/</g, '&lt;') + '</li>').join('') : '<li class="g">✅ Looks good.</li>';
+  $('add').disabled = errs > 0;
+}
+COLS.forEach((c) => { if ($(c)) $(c).addEventListener('input', check); });
+$('level').addEventListener('change', check); $('topic').addEventListener('change', check);
+$('add').addEventListener('click', () => { const r = read(); if (lint(r).some((x) => x[0] === 'e')) return; rows.push(r); save(); render(); ['question_en','answer_en','wrong1_en','wrong2_en','wrong3_en','question_ms','answer_ms','wrong1_ms','wrong2_ms','wrong3_ms','emoji'].forEach((c) => { $(c).value = ''; }); check(); $('question_en').focus(); });
+$('clearForm').addEventListener('click', () => { COLS.forEach((c) => { if ($(c) && c !== 'subject' && c !== 'level' && c !== 'topic') $(c).value = ''; }); check(); });
+function csv() { const cell = (s) => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"'; return [COLS.join(',')].concat(rows.map((r) => COLS.map((c) => cell(r[c])).join(','))).join('\n') + '\n'; }
+function render() {
+  $('count').textContent = rows.length; $('empty').hidden = rows.length > 0;
+  $('rows').innerHTML = rows.map((r, i) => '<tr><td>' + (r.emoji || '') + ' ' + r.subject + ' · L' + r.level + '</td><td>' + r.question_en.replace(/</g, '&lt;') + '<br><span class="small">' + r.question_ms.replace(/</g, '&lt;') + '</span></td><td><button class="ghost" data-i="' + i + '" aria-label="Remove row ' + (i + 1) + '">🗑️</button></td></tr>').join('');
+  $('dl').disabled = $('copy').disabled = !rows.length;
+}
+$('rows').addEventListener('click', (e) => { const b = e.target.closest('button[data-i]'); if (!b) return; rows.splice(+b.dataset.i, 1); save(); render(); check(); });
+$('dl').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv()], { type: 'text/csv' })); a.download = 'new-questions.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); });
+$('copy').addEventListener('click', () => { navigator.clipboard.writeText(csv()).then(() => { $('copy').textContent = 'Copied!'; setTimeout(() => { $('copy').textContent = 'Copy CSV'; }, 1500); }); });
+$('clearAll').addEventListener('click', () => { if (rows.length && !confirm('Remove all ' + rows.length + ' questions from the list?')) return; rows = []; save(); render(); check(); });
+function parseCSV(text) { const out = []; let row = [], cur = '', q = false; for (let i = 0; i < text.length; i++) { const c = text[i]; if (q) { if (c === '"' && text[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; } else if (c === '"') q = true; else if (c === ',') { row.push(cur); cur = ''; } else if (c === '\n') { row.push(cur); out.push(row); row = []; cur = ''; } else if (c !== '\r') cur += c; } if (cur || row.length) { row.push(cur); out.push(row); } return out; }
+$('load').addEventListener('change', (e) => { const f = e.target.files[0]; if (!f) return; f.text().then((t) => { const tb = parseCSV(t).filter((r) => r.some((c) => c.trim())), head = tb[0].map((h) => h.trim().toLowerCase()); const add = tb.slice(1).map((r) => Object.fromEntries(head.map((h, i) => [h, clean(r[i])]))).filter((r) => r.question_en); rows = rows.concat(add); save(); render(); check(); e.target.value = ''; }); });
+render(); check();
+</script>
+</body>
+</html>

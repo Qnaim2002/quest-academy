@@ -1,0 +1,222 @@
+/* ================= v13: "Royal Night" + "Parchment" looks for pixel mode =================
+   Colours come from the Pixel Knights sheet: deep indigo panels, gold trim, white text.
+   Every panel is an RPG window: dark outer line, a lighter bevel line inside it. */
+html[data-pixel="1"][data-theme="dark"]{
+  --bg:#14112E; --surface:#1E1A45; --surface2:#2A2560; --ink:#FFFFFF; --muted:#C9C3F0; --line:#332D6B;
+  --primary:#FFB938; --primary-ink:#2A1A06; --accent:#FF6F91; --good:#3ED6A0; --good-soft:#123A33;
+  --hint:#2A2457; --hint-ink:#E8DEFF; --q:#231E52; --track:#100D26; --star:#FFD166;
+  --bar1:#5C86F0; --bar2:#B37BFF; --bar3:#2CB8A0; --bar-ink:#fff;
+  --shadow:0 6px 0 rgba(0,0,0,.42); --stage-veil:transparent;
+  --pxl:#0B0919; --bevel:#4A3F8F; --gold:#FFD166; --gold-d:#C98A1B; --win:#1E1A45; --win-hi:#28225A;
+}
+html[data-pixel="1"][data-theme="warm"]{
+  --bg:#EAD9B2; --surface:#FFF6DF; --surface2:#F5E6C2; --ink:#2B2142; --muted:#6E5C7E; --line:#D7BC86;
+  --primary:#E8762B; --primary-ink:#fff; --accent:#E5484D; --good:#17A99B; --good-soft:#CFF3EE;
+  --hint:#EDE4FF; --hint-ink:#4A2F8A; --q:#FFF6DF; --track:#E9D3A0; --star:#E8A400;
+  --pxl:#2B2142; --bevel:#E9C98A; --gold:#C98A1B; --gold-d:#8A5A10; --win:#FFF6DF; --win-hi:#FFFBEE;
+}
+
+/* the world behind the app: a pixel sky with a castle on the hill */
+/* (a fixed layer instead of background-attachment:fixed, which repaints on every scroll on phones) */
+html[data-pixel="1"]{background:var(--bg)}
+html[data-pixel="1"] body{background:transparent}
+html[data-pixel="1"] body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(10,8,28,.35)),var(--px-backdrop,none) center bottom / cover no-repeat;image-rendering:pixelated;transform:translateZ(0)}
+html[data-pixel="1"][data-theme="warm"] body::before{background:linear-gradient(180deg,rgba(255,246,223,.15),rgba(234,217,178,.4)),var(--px-backdrop,none) center bottom / cover no-repeat}
+
+/* RPG windows: outer dark line + inner bevel, flat colour, no soft shadows */
+html[data-pixel="1"] :is(.herostrip,.sj,.zone,.item,.lcard,.pcard,.card,.dom,.lsec,.petstrip,.pv-banner,.dress-note,.dq,.qcard,.fcard,.tcard,.arm-top>.preview){background:var(--win)!important;box-shadow:inset 0 0 0 3px var(--pxl),inset 0 0 0 5px var(--bevel),0 5px 0 rgba(0,0,0,.28)!important}
+html[data-pixel="1"] .sj{box-shadow:inset 12px 0 0 var(--c),inset 0 0 0 3px var(--pxl),inset 0 0 0 5px var(--bevel),0 5px 0 rgba(0,0,0,.28)!important}
+html[data-pixel="1"] .sheet{background:var(--win);box-shadow:inset 0 0 0 4px var(--pxl),inset 0 0 0 7px var(--gold-d),inset 0 0 0 9px var(--pxl)}
+html[data-pixel="1"] .sheet.cine{background:#000;box-shadow:none}
+
+/* titles: gold pixel lettering with a hard drop shadow */
+html[data-pixel="1"][data-theme="dark"] :is(.title,.section,.zhead>b,.sheet h2,.lsec-h h3){color:var(--gold);text-shadow:2px 2px 0 var(--pxl)}
+html[data-pixel="1"][data-theme="warm"] :is(.title,.section){color:#7A3E10;text-shadow:2px 2px 0 rgba(255,255,255,.7)}
+
+/* buttons: chunky gold (primary), indigo (ghost) */
+html[data-pixel="1"] .btn:not(.ghost):not(.good):not(:disabled){background:var(--primary);color:var(--primary-ink);text-shadow:none}
+html[data-pixel="1"][data-theme="dark"] .btn.ghost{background:var(--surface2);color:var(--ink)}
+html[data-pixel="1"] .btn:disabled{filter:saturate(.4) brightness(.9)}
+html[data-pixel="1"] .chip[aria-pressed="true"],html[data-pixel="1"] .seg .chip[aria-pressed="true"]{background:var(--primary)!important;color:var(--primary-ink)!important}
+html[data-pixel="1"][data-theme="dark"] .chip:not([aria-pressed="true"]){background:var(--surface2);color:var(--ink)}
+
+/* top bar: coin purse and buttons as little gold-trimmed tiles */
+html[data-pixel="1"] .topbar{background:linear-gradient(180deg,rgba(11,9,25,.75),rgba(11,9,25,0))}
+html[data-pixel="1"][data-theme="warm"] .topbar{background:none}
+html[data-pixel="1"] :is(.coins,.langbtn,.fsbtn,.musbtn,.timer){background:var(--win);box-shadow:inset 0 0 0 3px var(--pxl),inset 0 0 0 5px var(--bevel)!important}
+html[data-pixel="1"] .coins{box-shadow:inset 0 0 0 3px var(--pxl),inset 0 0 0 5px var(--gold-d)!important}
+html[data-pixel="1"] .coins .c{border-radius:0;clip-path:polygon(25% 0,75% 0,100% 25%,100% 75%,75% 100%,25% 100%,0 75%,0 25%)}
+html[data-pixel="1"][data-theme="dark"] #coinVal{color:var(--gold)}
+
+/* bottom nav: a dark stone bar with a gold rim, the open tab is a lit gold tile */
+html[data-pixel="1"] .nav{border-radius:0;border-top:0;background:var(--pxl);box-shadow:inset 0 3px 0 var(--gold-d),inset 0 6px 0 var(--pxl),inset 0 8px 0 var(--bevel)}
+html[data-pixel="1"][data-theme="warm"] .nav{background:#3B2A4F}
+html[data-pixel="1"] .nav button{color:#C9C3F0;margin-top:6px}
+html[data-pixel="1"] .nav button[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);box-shadow:inset 0 0 0 3px var(--pxl),inset 0 -5px 0 rgba(0,0,0,.25),inset 0 5px 0 rgba(255,255,255,.35)}
+html[data-pixel="1"] .nav button span:last-child{font-family:var(--font-pixel);font-weight:400;font-size:.5rem;letter-spacing:0;margin-top:4px}
+
+/* hero card on the home screen */
+html[data-pixel="1"] .herostrip .hs-av{background:repeating-conic-gradient(var(--surface2) 0 25%,var(--win-hi) 0 50%) 0 0/12px 12px;box-shadow:inset 0 0 0 3px var(--pxl);border-radius:0;padding:4px}
+html[data-pixel="1"] .xp i,html[data-pixel="1"] .zbar i{background-color:var(--gold)}
+
+/* map tiles: stone tiles that glow gold when done */
+html[data-pixel="1"][data-theme="dark"] .zone{background:var(--win)!important}
+html[data-pixel="1"][data-theme="dark"] .zgrid .lnode.normal:not(.locked) .orb{background:#5B4FC4;color:#fff}
+html[data-pixel="1"] .zgrid .lnode.mini:not(.locked) .orb{background:#E5484D;color:#fff}
+html[data-pixel="1"] .zgrid .lnode.big:not(.locked) .orb{background:var(--gold);color:#2A1A06}
+html[data-pixel="1"] .zgrid .lnode .stars i{color:var(--gold)}
+
+/* armory: knights get a portrait plinth */
+html[data-pixel="1"] .items.knights .item .item-pv{background:radial-gradient(ellipse at 50% 92%,rgba(255,209,102,.28) 0 30%,transparent 31%),repeating-conic-gradient(var(--surface2) 0 25%,var(--win-hi) 0 50%) 0 0/12px 12px;box-shadow:inset 0 0 0 3px var(--pxl)}
+html[data-pixel="1"] .items.knights .item b{font-family:var(--font-pixel);font-weight:400;font-size:.62rem;line-height:1.5;color:var(--gold)}
+html[data-pixel="1"][data-theme="warm"] .items.knights .item b{color:#7A3E10}
+
+/* the question card and answers in battle */
+html[data-pixel="1"][data-theme="dark"] #battleView .qcard{background:var(--win)!important}
+html[data-pixel="1"] .hint{background:var(--hint);box-shadow:inset 0 0 0 3px var(--pxl),inset 0 0 0 5px var(--bevel)!important}
+
+/* subject tiles in Studies keep their colours but get the window frame */
+html[data-pixel="1"] .subject{box-shadow:inset 0 0 0 3px var(--pxl),inset 0 0 0 6px rgba(255,255,255,.28),0 5px 0 rgba(0,0,0,.28)!important}
+
+/* smoother tab changes */
+html[data-pixel="1"] .tab.on{animation:pxTabIn .14s ease-out}   /* v26: quicker tab change */
+@keyframes pxTabIn{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){html[data-pixel="1"] .tab{animation:none!important}}
+
+/* ---------- story scenes: RPG dialogue window ---------- */
+html[data-pixel="1"] .cine .cn-dlg{display:flex;gap:12px;align-items:stretch;width:min(760px,100%);background:#1E1A45;color:#fff;padding:12px 14px;box-shadow:inset 0 0 0 3px #0B0919,inset 0 0 0 6px #C98A1B,inset 0 0 0 8px #0B0919,0 6px 0 rgba(0,0,0,.45);clip-path:var(--notch);animation:pxDlgIn .3s steps(3,end) both}
+html[data-pixel="1"] .cine .cn-dlg.foe{background:#3A1430;box-shadow:inset 0 0 0 3px #0B0919,inset 0 0 0 6px #C2304E,inset 0 0 0 8px #0B0919,0 6px 0 rgba(0,0,0,.45)}
+@keyframes pxDlgIn{from{transform:translateY(24px);opacity:0}}
+html[data-pixel="1"] .cine .cn-port{flex:none;width:clamp(64px,16vw,96px);aspect-ratio:1;margin:4px 0 4px 4px;background:repeating-conic-gradient(#2A2560 0 25%,#231E52 0 50%) 0 0/10px 10px;box-shadow:inset 0 0 0 3px #0B0919,inset 0 0 0 5px #4A3F8F;display:grid;place-items:center;align-self:center}
+html[data-pixel="1"] .cine .cn-dlg.foe .cn-port{background:repeating-conic-gradient(#4A1A3A 0 25%,#3A1430 0 50%) 0 0/10px 10px}
+html[data-pixel="1"] .cine .cn-port svg{width:88%;height:88%;display:block}
+html[data-pixel="1"] .cine .cn-say{position:relative;flex:1;min-width:0;padding:6px 18px 8px 0}
+html[data-pixel="1"] .cine .cn-who{display:inline-block;font-family:var(--font-pixel);font-weight:400;font-size:.62rem;color:#FFD166;background:#0B0919;padding:5px 8px 4px;margin-bottom:6px;text-shadow:none}
+html[data-pixel="1"] .cine .cn-dlg .cn-sub{text-align:left;max-width:none;text-shadow:none;font-size:clamp(.98rem,1.6vw + .55rem,1.3rem);line-height:1.45;animation:none}
+html[data-pixel="1"] .cine .cn-dlg .cn-sub .w{display:inline-block;white-space:nowrap}
+html[data-pixel="1"] .cine .cn-dlg .cn-sub i{font-style:normal;animation:pxType 0s linear both;animation-delay:calc(.32s + var(--c) * 24ms)}
+@keyframes pxType{from{visibility:hidden}}
+html[data-pixel="1"] .cine .cn-more{position:absolute;right:2px;bottom:2px;font-style:normal;color:#FFD166;font-size:.8rem;animation:pxMore .8s steps(2,end) infinite;animation-delay:calc(.4s + var(--n) * 24ms);opacity:0}
+@keyframes pxMore{0%{opacity:1;transform:translateY(0)}50%{opacity:1;transform:translateY(3px)}100%{opacity:1}}
+html[data-pixel="1"] .cine .cn-ctl .btn.ghost{background:#1E1A45;color:#fff;box-shadow:inset 0 0 0 3px #0B0919,inset 0 0 0 5px #4A3F8F!important}
+html[data-pixel="1"] .cine .cn-title h2{color:#FFD166;text-shadow:4px 4px 0 #0B0919}
+html[data-pixel="1"] .cine .cn-stage svg image{image-rendering:pixelated}
+@media (prefers-reduced-motion:reduce){html[data-pixel="1"] .cine .cn-dlg,html[data-pixel="1"] .cine .cn-dlg .cn-sub i{animation:none!important}html[data-pixel="1"] .cine .cn-more{opacity:1;animation:none}}
+html[data-sensory="1"][data-pixel="1"] .cine .cn-dlg .cn-sub i{animation:none}
+
+/* lazy sprites: a soft silhouette until the pixel sprite is drawn, then a quick stepped fade */
+.px-lazy{display:block;width:100%;aspect-ratio:1;background:radial-gradient(ellipse 30% 38% at 50% 48%,rgba(127,110,220,.28),transparent 70%)}
+.px-in{animation:pxIn .24s steps(3,end) both}
+@keyframes pxIn{from{opacity:0}}
+
+/* ---------- smoothness: no blurred filters on moving sprites, no backdrop blur ---------- */
+html[data-pixel="1"] .overlay{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(11,9,25,.74)}
+html[data-pixel="1"] #battleView .sprite>svg{will-change:transform}
+html[data-pixel="1"] .sprite.monster.raging>svg{filter:saturate(1.5) brightness(1.08)}
+html[data-pixel="1"] .sprite.monster.enraged>svg{filter:saturate(1.9) hue-rotate(-18deg)}
+html[data-pixel="1"] .sprite.dash>svg{filter:none}
+html[data-pixel="1"] .sprite.charging>svg{filter:brightness(1.35) saturate(1.3)}
+html[data-pixel="1"] .sprite.windup>svg{filter:brightness(1.2) sepia(.3) saturate(1.6) hue-rotate(-20deg)}
+html[data-pixel="1"] .fxowl{filter:none}
+html[data-pixel="1"] .sj .em{filter:none}
+html[data-pixel="1"] .uslot{border-radius:0}
+html[data-pixel="1"][data-theme="dark"] .uslot:not(.pre):not(.filled):not(.q){border-color:#8C7FE0;background:rgba(140,127,224,.08)}
+
+/* ---------- v15: story picture sits above the caption box ---------- */
+.cine .cn-stage>svg{top:var(--cn-top,0);bottom:auto;height:calc(100% - var(--cn-top,0px) - var(--cn-bot,0px));overflow:visible}
+
+/* ---------- v15: no text shadows anywhere in battle (clean, flat pixel text) ---------- */
+#battleView,#battleView *,.fxnum,.float,.vs-intro,.vs-intro *,.phase-banner{text-shadow:none!important}
+/* floating damage numbers keep a crisp dark outline instead, so they still read over the scenery */
+.fxnum,.float{-webkit-text-stroke:5px #1d1830;paint-order:stroke fill}
+html[data-pixel="1"] .vs-word{-webkit-text-stroke:6px #4A2600;paint-order:stroke fill}
+
+/* ---------- v15: transitions ---------- */
+.px-wipe{position:fixed;inset:0;width:100vw;height:100vh;z-index:9999;pointer-events:all;image-rendering:pixelated;image-rendering:crisp-edges}
+@keyframes pxSlideIn{from{transform:translateX(24px);opacity:0}}
+@keyframes pxSlideBack{from{transform:translateX(-24px);opacity:0}}
+@keyframes pxPopIn{0%{transform:scale(.88);opacity:0}60%{transform:scale(1.03);opacity:1}}
+.px-enter-slide{animation:pxSlideIn .26s steps(4,end) both}
+.px-enter-back{animation:pxSlideBack .26s steps(4,end) both}
+.px-enter-pop{animation:pxPopIn .3s steps(4,end) both}
+/* modals pop in with stepped pixel motion */
+html[data-pixel="1"] .overlay.on .sheet:not(.cine){animation:pxPopIn .28s steps(4,end) both}
+html[data-pixel="1"] .overlay.on{animation:pxFadeIn .18s steps(3,end) both}
+@keyframes pxFadeIn{from{opacity:0}}
+/* level tiles drop in one after another when a zone opens */
+html[data-pixel="1"] .zgrid .lnode{animation:pxTileIn .32s steps(4,end) both;animation-delay:calc(var(--i,0) * 28ms)}
+@keyframes pxTileIn{from{transform:translateY(-10px) scale(.8);opacity:0}}
+/* battle view slides up from the bottom of the stage on entry */
+html[data-pixel="1"] #battleView:not([hidden]) .qcard,html[data-pixel="1"] #battleView:not([hidden]) .answers{animation:pxRise .3s steps(4,end) both}
+html[data-pixel="1"] #battleView:not([hidden]) .answers{animation-delay:.08s}
+@keyframes pxRise{from{transform:translateY(16px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.px-enter-slide,.px-enter-back,.px-enter-pop,html[data-pixel="1"] .zgrid .lnode,html[data-pixel="1"] .overlay.on .sheet,html[data-pixel="1"] #battleView .qcard,html[data-pixel="1"] #battleView .answers{animation:none!important}}
+html[data-sensory="1"] :is(.zgrid .lnode,.overlay.on .sheet,#battleView .qcard,#battleView .answers){animation:none!important}
+
+/* ---------- v15 smoothness: skip work for off-screen cards, instant taps ---------- */
+.items .item{content-visibility:auto;contain-intrinsic-size:auto 230px}
+.zone.zlocked,.lessonlist .lcard{content-visibility:auto;contain-intrinsic-size:auto 90px}
+button,.btn,.chip,.ans,[data-act]{touch-action:manipulation}
+
+/* ---------- v16: victory stories ---------- */
+.cine .cn-dizzy{animation:cnDizzy 1.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes cnDizzy{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg) translateY(-3px)}}
+.cine .cn-title.vict h2{color:#FFD166}
+.storybtn.vict{background:linear-gradient(180deg,#FFD166,#E8A400)!important;color:#2A1A06!important}
+
+/* ================= v16: bigger, more epic, more compact battle ================= */
+/* the arena takes the spotlight */
+#battleView .stage{height:clamp(300px,47vh,470px)}
+@media (min-width:900px){#battleView .stage{height:clamp(320px,52vh,540px)}}
+@media (max-height:620px){#battleView .stage{height:clamp(220px,44vh,300px)}}
+html[data-pixel="1"] #battleView .sprite{bottom:58px}
+/* v17: fighters a little smaller so the arena breathes */
+html[data-pixel="1"] #battleView .sprite.hero{width:clamp(104px,28%,196px);left:9%}
+html[data-pixel="1"] #battleView .sprite.monster{width:clamp(110px,29%,204px);right:8%}
+html[data-pixel="1"] #battleView .sprite.monster.boss{width:clamp(124px,33%,232px);right:7%}
+html[data-pixel="1"] #battleView .sprite.monster.big{width:min(clamp(156px,44%,310px),calc(clamp(300px,47vh,470px)*.66));right:3%}   /* v19: epic bosses fill more of the stage, capped by stage height */
+/* glowing pedestals under the fighters (stepped pulse = pixel feel, transform/opacity only) */
+html[data-pixel="1"] #battleView .sprite::before{content:"";position:absolute;left:8%;right:8%;bottom:-2%;height:12%;z-index:-1;background:radial-gradient(ellipse at center,var(--ped,rgba(62,214,160,.55)) 0 35%,transparent 70%);animation:pxPed 1.6s steps(4,end) infinite}
+html[data-pixel="1"] #battleView .sprite.monster::before{--ped:rgba(255,95,120,.5)}
+html[data-pixel="1"] #battleView .sprite.monster.big::before{--ped:rgba(255,60,90,.75);left:0;right:0}
+@keyframes pxPed{50%{opacity:.55;transform:scaleX(.9)}}
+/* gold pixel corner brackets + a cinematic vignette on the arena frame */
+html[data-pixel="1"] #battleView .stage::before{border-radius:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);background:
+  linear-gradient(#FFD166,#FFD166) 6px 6px/22px 5px no-repeat,linear-gradient(#FFD166,#FFD166) 6px 6px/5px 22px no-repeat,
+  linear-gradient(#FFD166,#FFD166) calc(100% - 6px) 6px/22px 5px no-repeat,linear-gradient(#FFD166,#FFD166) calc(100% - 6px) 6px/5px 22px no-repeat,
+  linear-gradient(#FFD166,#FFD166) 6px calc(100% - 6px)/22px 5px no-repeat,linear-gradient(#FFD166,#FFD166) 6px calc(100% - 6px)/5px 22px no-repeat,
+  linear-gradient(#FFD166,#FFD166) calc(100% - 6px) calc(100% - 6px)/22px 5px no-repeat,linear-gradient(#FFD166,#FFD166) calc(100% - 6px) calc(100% - 6px)/5px 22px no-repeat}
+html[data-pixel="1"] #battleView .stage::after{background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 55%,rgba(8,4,24,.55) 100%)!important}
+/* boss arenas: a red storm pulse and distant lightning */
+html[data-pixel="1"] #battleView .stage[data-tier="big"]::after{background:radial-gradient(ellipse 75% 70% at 50% 55%,transparent 50%,rgba(70,0,20,.62) 100%)!important;animation:pxStorm 5s steps(1,end) infinite}
+@keyframes pxStorm{0%,88%,94%,100%{filter:none}90%,96%{filter:brightness(2.2)}}
+html[data-pixel="1"] #battleView .stage[data-tier="big"]{box-shadow:0 0 0 4px #FF5E7A,0 0 0 8px var(--pxl),8px 12px 0 4px rgba(20,8,48,.35)}
+/* compact combat area: smaller question card, solving tools and answers */
+#battleView .combat{gap:8px;padding-top:8px}
+#battleView .cL{gap:8px}
+#battleView .qcard{padding:8px 12px}
+#battleView #qText{font-size:clamp(.92rem,1.1vw + .6rem,1.05rem);line-height:1.3;margin:2px 0 4px}
+#battleView .qhead .speak{width:38px;height:38px;min-height:0;font-size:1rem}
+#battleView .qviz{zoom:.86;padding:4px}
+/* count blocks stay small squares instead of stretching across the card */
+#battleView .utrack{display:flex!important;flex-wrap:wrap;gap:4px}
+#battleView .uslot{width:clamp(30px,8.4vw,46px);height:auto;flex:none;min-height:0}
+#battleView .clue{font-size:clamp(1.8rem,6vw,2.4rem)}
+#battleView .qviz :is(.btn,button){min-height:44px}
+#battleView .hint{padding:6px 10px;gap:4px 8px;font-size:.84rem;line-height:1.3}
+#battleView .hint .hrow>svg{width:34px;height:34px}
+#battleView .hint .btn{min-height:40px;padding:0 12px;font-size:.85rem}
+#battleView .answers{gap:8px}
+#battleView .answers .ans{min-height:54px;font-size:clamp(1rem,3.6vw,1.3rem);padding:4px 6px}
+html[data-pixel="1"] #battleView .ans:not(.txt):not(.spell){font-size:clamp(.95rem,3.6vw,1.25rem)}
+@media (min-width:900px){#battleView .answers .ans{min-height:60px}}
+#battleView .answers.long .ans{min-height:52px;font-size:.92rem}
+/* v21: tracing pad and practice sheet */
+.trace{display:grid;justify-items:center;gap:8px;width:100%}
+.trace .trcv{touch-action:none;border-radius:18px;background:var(--surface,#fff);box-shadow:inset 0 0 0 3px rgba(124,92,255,.25)}
+.trace .trbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.trace .trmsg{margin:0;font-weight:800;min-height:1.3em;text-align:center}
+.trglyph{font:900 min(26vw,120px)/1 var(--font-display);text-align:center;opacity:.9}
+.trpick{display:flex;flex-wrap:wrap;gap:6px}.trpick .chip{min-width:44px;min-height:44px;justify-content:center;font-weight:900}
+.trpick .chip.done{box-shadow:inset 0 -3px 0 #3FBF7F}
+#battleView #answers:has(.trace){position:static;background:none}

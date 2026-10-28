@@ -1,0 +1,42 @@
+/* ================= Studies ================= */
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.subject{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 6px;min-height:92px;border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);font-weight:800}
+.subject .em{font-size:1.9rem;line-height:1}
+.subject small{color:var(--muted);font-weight:700}
+.subject[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.subject[aria-pressed="true"] small{color:inherit;opacity:.9}
+.module{background:var(--surface);border-radius:var(--r);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+.module>button{display:flex;align-items:center;gap:12px;width:100%;min-height:72px;padding:12px 16px;text-align:left}
+.module .em{font-size:1.8rem}
+.module .t{flex:1;font-family:var(--font-display);font-size:1.15rem;font-weight:800}
+.module .t small{display:block;font-family:var(--font-body);font-size:.78rem;color:var(--muted);font-weight:700}
+.module .done{color:var(--good);font-size:1.3rem}
+.module .body{padding:0 16px 16px;animation:drop .25s}
+.module .body p{margin:8px 0;font-size:1rem;line-height:1.5}
+.module .listen{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.module .viz{background:var(--q);border-radius:16px;padding:10px;margin:10px 0}
+.blend .clue{font-size:3rem;text-align:center}
+.btiles{display:flex;justify-content:center;gap:10px;margin:10px 0;transition:gap .5s}
+.btiles.joined{gap:2px}
+.btile{min-width:var(--tap);min-height:72px;padding:0 18px;border-radius:var(--r);background:var(--surface2);font-family:var(--font-display);font-size:1.8rem;font-weight:800;box-shadow:var(--shadow);transition:background .2s,transform .2s}
+.btile.lit{background:var(--primary);color:var(--primary-ink);transform:translateY(-4px)}
+.btiles.joined .btile{border-radius:12px}
+.react-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:8px 0}
+.react-row .btn{min-height:72px;flex-direction:column;gap:2px;font-size:.85rem;text-align:center;padding:6px 10px}
+.effect{display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--r);background:var(--good-soft)}
+.effect .e{font-size:2.4rem}
+
+/* ================= Armory ================= */
+.arm-top{display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:16px;align-items:center;margin-bottom:16px}
+.preview{background:radial-gradient(circle at 50% 40%,var(--surface2),var(--surface));border-radius:var(--r);padding:12px;box-shadow:var(--shadow)}
+.preview svg{width:100%;height:auto;max-height:230px}
+.statline{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.stat{padding:8px 14px;border-radius:999px;background:var(--surface);font-weight:800;box-shadow:var(--shadow)}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);text-align:center}
+.item svg{width:84px;height:105px}
+.item b{font-family:var(--font-display);font-size:1rem}
+.item small{color:var(--muted);font-size:.78rem;min-height:1.1em}
+.item .btn{width:100%;padding:0 10px;font-size:.9rem}
+.item.worn{outline:4px solid var(--good)}
+

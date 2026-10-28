@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="warm" data-band="2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF0B3">
+<title>Quest Academy</title>
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Quest Academy">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="tb-left"><button class="fsbtn" id="fsBtn" data-act="fullscreen" aria-label="Full screen" aria-pressed="false"><svg class="i-enter" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-exit" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><div class="brand"><i>★</i><span>Quest Academy</span></div></div>
+    <div class="tb-right">
+      <button class="whobtn" id="whoBtn" data-act="who" hidden></button>
+      <div class="timer" id="timerPill" hidden aria-live="off">⏳ <span id="timerTxt"></span></div>
+      <button class="musbtn" id="musBtn" data-act="music" aria-label="Music" aria-pressed="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path class="slash" d="M3 3l18 18"/></svg></button>
+      <button class="langbtn" id="langBtn" data-act="langCycle">🌐 <b id="langCode">EN</b><span class="nm" id="langName">English</span></button>
+      <div class="coins" id="coins" aria-live="polite"><span class="c">🪙</span><span id="coinVal">0</span></div>
+      <button class="v37-lock" id="v37Lock" data-act="tab" data-v="parent" aria-label="Grown-ups only"><span aria-hidden="true">🔒</span></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="v37-sub" id="v37Sub" hidden><button class="v37-back" data-act="tab" data-v="play" aria-label="Back"><span aria-hidden="true">‹</span></button><h1 id="v37SubT"></h1></div>
+    <section class="tab" id="tab-studies" role="tabpanel" aria-labelledby="nav-studies"></section>
+    <section class="tab" id="tab-armory" role="tabpanel" aria-labelledby="nav-armory"></section>
+    <section class="tab" id="tab-settings" role="tabpanel" aria-labelledby="nav-settings"></section>
+    <section class="tab" id="tab-play" role="tabpanel" aria-labelledby="nav-play"></section>
+    <section class="tab" id="tab-adventure" role="tabpanel" aria-labelledby="nav-adventure"></section>
+    <section class="tab" id="tab-cards" role="tabpanel" aria-labelledby="nav-cards"></section>
+    <section class="tab" id="tab-tower" role="tabpanel" aria-labelledby="nav-tower"></section>
+    <section class="tab" id="tab-kbat" role="tabpanel" aria-labelledby="nav-kbat"></section>
+    <section class="tab" id="tab-parent" role="tabpanel" aria-labelledby="nav-parent"></section>
+  </main>
+
+  <nav class="nav" role="tablist" aria-label="Main sections">
+    <button role="tab" id="nav-studies" data-act="tab" data-v="studies"><span class="ic">📚</span><span data-t="nav.studies">Learn</span></button>
+    <button role="tab" id="nav-play" data-act="tab" data-v="play"><span class="ic">🎮</span><span data-t="nav.play">Play</span></button>
+    <button role="tab" id="nav-armory" data-act="tab" data-v="armory"><span class="ic">🛡️</span><span data-t="nav.armory">Hero</span></button>
+    <button role="tab" id="nav-cards" data-act="tab" data-v="cards"><span class="ic">🎴</span><span data-t="nav.cards">Cards</span></button>
+    <button role="tab" id="nav-settings" data-act="tab" data-v="settings"><span class="ic">⚙️</span><span data-t="nav.settings">Settings</span></button>
+    <!-- v37: these three live inside Play (and Parents behind the 🔒 button); the buttons stay here, hidden, so the game and its tests can still reach them -->
+    <button role="tab" id="nav-adventure" data-act="tab" data-v="adventure" hidden><span class="ic">🗺️</span><span data-t="nav.adventure">Adventure</span></button>
+    <button role="tab" id="nav-tower" data-act="tab" data-v="tower" hidden><span class="ic">🗼</span><span data-t="nav.tower">Tower</span></button>
+    <button role="tab" id="nav-kbat" data-act="tab" data-v="kbat" hidden><span class="ic">🧠</span><span data-t="nav.kbat">KBAT</span></button>
+    <button role="tab" id="nav-parent" data-act="tab" data-v="parent" hidden><span class="ic">🔒</span><span data-t="nav.parent">Parents</span></button>
+  </nav>
+</div>
+
+<div class="overlay" id="evoOverlay"><div class="mwrap"><button class="mclose" data-act="evoClose" aria-label="Close">✕</button><div class="sheet evo" id="evoSheet" role="dialog" aria-modal="true" aria-label="Evolution"></div></div></div>
+<div class="overlay" id="comicOverlay"><div class="mwrap"><button class="mclose" data-act="comicSkip" aria-label="Close">✕</button><div class="sheet comic" id="comicSheet" role="dialog" aria-modal="true" aria-label="Story"></div></div></div>
+<div class="overlay" id="lessonListOverlay"><div class="mwrap"><button class="mclose" data-act="closeList" aria-label="Close">✕</button><div class="sheet lesson lessonlist" id="lessonListSheet" role="dialog" aria-modal="true" aria-label="Lessons"></div></div></div>
+<div class="overlay" id="lessonOverlay"><div class="mwrap"><button class="mclose" data-act="closeLesson" aria-label="Close">✕</button><div class="sheet lesson" id="lessonSheet" role="dialog" aria-modal="true" aria-label="Lesson"></div></div></div>
+<div class="overlay" id="briefOverlay"><div class="mwrap"><button class="mclose" data-act="closeBrief" aria-label="Close">✕</button><div class="sheet" id="briefSheet" role="dialog" aria-modal="true" aria-label="Level briefing"></div></div></div>
+<div class="overlay" id="winOverlay"><div class="mwrap"><button class="mclose" data-act="toMap" aria-label="Close">✕</button><div class="sheet win" id="winSheet" role="dialog" aria-modal="true" aria-label="Victory"></div></div></div>
+<div class="overlay" id="timeOverlay"><div class="mwrap"><button class="mclose" data-act="timeParent" aria-label="Close">✕</button><div class="sheet timeup" id="timeSheet" role="alertdialog" aria-modal="true" aria-label="Time for a break"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="overlay" id="welcomeOverlay"><div class="mwrap"><button class="mclose" data-act="wlGo" aria-label="Close">✕</button><div class="sheet" id="welcomeSheet" role="dialog" aria-modal="true"></div></div></div>
+<div class="overlay" id="leaveOverlay"><div class="mwrap"><button class="mclose" data-act="stay" aria-label="Close">✕</button><div class="sheet" id="leaveSheet" role="alertdialog" aria-modal="true"><h2 data-t="lock.title">Leave this battle?</h2><p class="sub" style="margin-top:8px" data-t="lock.body"></p><div class="lv-actions"><button class="btn big" data-act="stay" data-t="lock.stay">Keep fighting</button><button class="btn ghost" data-act="leave" data-t="lock.leave">Back to map</button></div></div></div></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

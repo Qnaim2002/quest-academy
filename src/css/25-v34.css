@@ -1,0 +1,108 @@
+/* ================= v34 ================= */
+
+/* ---- the quick check (placement quiz) ---- */
+.v34sheet{text-align:center}
+.pl-hero{width:120px;height:120px;margin:0 auto 6px}
+.pl-hero svg{width:100%;height:100%}
+.pl-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;margin-bottom:6px}
+.pl-subj{font-size:1.1rem}
+.pl-count{font-size:.8rem;opacity:.75}
+.pl-bar{height:12px;border-radius:99px;background:var(--surface2);overflow:hidden;margin-bottom:10px}
+.pl-bar i{display:block;height:100%;background:var(--primary);border-radius:99px;transition:width .3s}
+.pl-q{background:var(--q);border-radius:16px;padding:12px;margin-bottom:10px;text-align:left}
+.pl-qhead{display:flex;justify-content:space-between;align-items:center}
+.pl-text{font-size:1.15rem;font-weight:700;line-height:1.4;margin:8px 0}
+.pl-viz{font-size:1.6rem;text-align:center}
+.pl-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.plopt{min-height:64px;padding:8px 10px;border-radius:16px;background:var(--surface);font-weight:800;font-size:1.05rem;box-shadow:var(--shadow);border:3px solid transparent}
+.plopt.chosen{border-color:var(--primary);background:var(--surface2)}
+.pl-foot{display:flex;justify-content:space-between;gap:10px;margin-top:10px}
+.pl-res{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px;text-align:left}
+.pl-res li{display:flex;justify-content:space-between;gap:8px;background:var(--surface);border-radius:12px;padding:8px 12px}
+.linkbtn{background:none;border:0;color:var(--ink);text-decoration:underline;font-weight:700;padding:8px}
+
+/* ---- the "harder / easier questions" badge in battle ---- */
+.adchip{background:rgba(255,230,140,.92)}
+.adchip.down{background:rgba(190,225,255,.92)}
+.adchip.adpop{animation:adpop .5s ease-out}
+@keyframes adpop{0%{transform:scale(.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.adchip.adpop{animation:none}}
+
+/* ---- write the answer (numbers) ---- */
+.wpad{background:var(--q);border-radius:16px;padding:10px;text-align:center}
+.wr-title{font-weight:800;margin:0 0 6px}
+.wboxes{display:flex;justify-content:center;gap:10px;flex-wrap:nowrap}
+.wcell{position:relative}
+.wbox{display:block;background:#fff;border:3px solid var(--line);border-radius:14px;touch-action:none;cursor:crosshair}
+html[data-theme="dark"] .wbox{background:#1b2040}
+.wdig{position:absolute;right:6px;bottom:2px;font-size:1.1rem;opacity:.7}
+.wr-read{min-height:1.4em;margin:6px 0;font-weight:800}
+.wpad .trbar{display:flex;gap:8px;justify-content:center}
+.wpad .linkbtn{margin-top:4px}
+/* ---- word problems: the picture strip over the story ---- */
+.clue.wp{font-size:1.5rem;line-height:1.35;word-break:break-word;max-height:7.5em;overflow:hidden}
+
+/* ---- KBAT tab ---- */
+.kbat{max-width:720px}
+.kb-chips{flex-wrap:wrap;margin:6px 0 10px}
+.kb-skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kb-skill{background:var(--surface);border-radius:16px;padding:10px;box-shadow:var(--shadow);display:grid;gap:4px}
+.kb-skill .kb-ic{font-size:1.5rem}
+.kb-skill small{opacity:.8}
+.kb-opts{grid-template-columns:1fr}
+.kb-opt{text-align:left;padding:12px 14px}
+.kb-opt.right{border-color:#2FA866;background:#DDF7E8;color:#10331f}
+.kb-opt.wrong{border-color:#E5484D;background:#FFE3E3;color:#4a1013}
+.kb-opt.dim{opacity:.55}
+.kb-fb{margin-top:10px;padding:12px;border-radius:14px;background:var(--surface2)}
+.kb-fb.ok{border-left:6px solid #2FA866}
+.kb-fb.no{border-left:6px solid #F0A93B}
+.kb-fb p{margin:6px 0 0}
+.kb-result{text-align:center}
+.kb-result .gain{font-weight:800}
+
+/* ---- the Me page: hero look, colour and frames ---- */
+html[data-heroc="1"] .herostrip{border-left:6px solid var(--hero-c)}
+html[data-heroc="1"] .hs-info .xp i{background:var(--hero-c)}
+html[data-heroc="1"] #hBar{background:linear-gradient(90deg,var(--hero-c),color-mix(in srgb,var(--hero-c) 55%,#fff))}
+html[data-heroc="1"] .lk-prev,html[data-heroc="1"] .hs-av,html[data-heroc="1"] .arm-top .preview{box-shadow:inset 0 0 0 4px var(--hero-c)}
+html[data-frame="round"] :is(.hs-av,.arm-top .preview,.lk-prev){border-radius:50%;overflow:hidden}
+html[data-frame="hex"] :is(.hs-av,.arm-top .preview,.lk-prev){clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+html[data-frame="shield"] :is(.hs-av,.arm-top .preview,.lk-prev){clip-path:polygon(0 0,100% 0,100% 62%,50% 100%,0 62%)}
+html[data-frame="diamond"] :is(.hs-av,.arm-top .preview,.lk-prev){clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.lkwrap{max-width:760px}
+.lk-top{display:flex;gap:14px;align-items:center;margin:8px 0 6px}
+button.lk-prev{width:130px;height:150px;flex:none;border-radius:var(--r);display:grid;place-items:center;overflow:hidden;padding:6px}
+.lk-prev svg,.lk-prev .hero-svg{width:100%;height:100%;max-height:none}
+.lk-id{display:grid;gap:6px;min-width:0;flex:1}
+.lk-lab{font-weight:800;font-size:.85rem;opacity:.8}
+.lk-id .kid-name{width:100%}
+.lk-chip{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--hero-c,var(--primary));color:#1b1b2b;font-weight:800;font-size:.78rem;margin-left:6px;vertical-align:middle}
+.lk-show{min-height:1.6em}
+.lk-say{min-height:1.4em;font-weight:700}
+.lk-h{margin:14px 0 6px;font-size:1rem}
+.lk-seg{flex-wrap:wrap;gap:6px}
+.lk-sw{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);vertical-align:-3px}
+.lk-sw.none{background:transparent;text-align:center;font-size:.7rem;line-height:14px}
+.chip.lk-locked{opacity:.55;font-size:.78rem}
+.lk-talk{max-width:min(260px,70%)}
+.lk-talk small{display:block;font-size:.7rem;opacity:.75;margin-bottom:2px}
+.lk-talk.pet{background:#FFF7DD}
+.lk-talk.cry{font-size:1rem}
+.celeb-offer{margin:8px auto;padding:8px 10px;border-radius:14px;background:var(--surface2);text-align:center;max-width:40ch}
+.celeb-offer p{margin:0 0 6px;font-size:.88rem;font-weight:700}
+.celeb-offer .seg{justify-content:center;gap:6px}
+@media (orientation:landscape) and (max-height:520px){button.lk-prev{width:96px;height:112px}}
+
+.lk-id .chip{justify-self:start}
+@media (min-width:860px){html[data-pixel="1"] .nav button span:last-child{font-size:.44rem}}
+
+/* ---- update bar and install card ---- */
+.pwabar{position:fixed;z-index:70;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 62px);display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;max-width:min(560px,calc(100% - 24px));padding:10px 14px;border-radius:18px;background:var(--surface);color:var(--ink);border:3px solid var(--primary);box-shadow:var(--shadow),0 8px 24px rgba(0,0,0,.3);font-weight:800}
+.pwabar .pw-t{display:grid;gap:2px;text-align:left;flex:1 1 220px}
+.pwabar small{font-weight:600;opacity:.85}
+.pwabar .btn{min-height:44px;padding:0 16px}
+html[data-pixel="1"] .pwabar{border-radius:0}
+.an-h{margin:12px 0 4px}
+.an-list{margin:4px 0 8px;padding-left:20px}
+@media (orientation:landscape) and (max-height:520px){.pwabar{top:8px;left:calc(50% + 35px)}}

@@ -1,0 +1,281 @@
+/* ================= v8 ================= */
+/* --- music button (top bar) --- */
+.musbtn{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.musbtn:active{transform:scale(.92)}
+.musbtn .slash{display:none}
+.musbtn.off{color:var(--muted)}
+.musbtn.off .slash{display:block}
+.musbtn:not(.off) svg{animation:noteBob 1.8s ease-in-out infinite}
+@keyframes noteBob{50%{transform:translateY(-2px) rotate(-6deg)}}
+@media (max-width:640px),(max-height:520px){.musbtn{width:40px;height:40px;border-radius:12px}}
+
+/* --- battle: compact screen, name + HP plate under each fighter --- */
+#battleView .stage{margin:10px var(--edge) 0;height:clamp(236px,37vh,330px)}
+#battleView .sprite{bottom:60px}
+#battleView .sprite.hero{left:8%}
+#battleView .sprite.monster{right:7%}
+#battleView .phasebar{top:54px;bottom:auto}
+.plate{position:absolute;z-index:4;bottom:8px;width:clamp(136px,31%,240px);padding:5px 8px 7px;border-radius:14px;background:rgba(255,255,255,.9);color:#2a2233;box-shadow:0 3px 0 rgba(0,0,0,.14),0 6px 14px rgba(40,20,80,.12);transition:transform .2s}
+html[data-theme="dark"] .plate{background:rgba(22,18,44,.86);color:#F3EEFF}
+.plate.hero{left:5%}
+.plate.mon{right:5%}
+.plate .pn{display:flex;align-items:center;justify-content:space-between;gap:6px;font-family:var(--font-display);font-weight:800;font-size:.8rem;line-height:1.1;margin:0 0 4px;white-space:nowrap}
+.plate .pn>span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.plate .bar{height:16px;box-shadow:inset 0 2px 0 rgba(0,0,0,.12)}
+.plate .bar i{z-index:1;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.plate .bar .ghost{position:absolute;inset:0 auto 0 0;width:100%;border-radius:999px;background:#FFB4A8;transition:width .6s ease .45s}
+.plate .bar span{z-index:2;font-size:.66rem}
+.plate.low .bar i{animation:lowHP 1s ease-in-out infinite}
+.plate.low{animation:plateShake 2.4s ease-in-out infinite}
+@keyframes lowHP{50%{filter:brightness(1.35) saturate(1.4)}}
+@keyframes plateShake{0%,90%,100%{transform:none}93%{transform:translateX(-2px)}96%{transform:translateX(2px)}}
+.pips{display:flex;gap:4px;flex:none}
+.pips i{width:12px;height:12px;border-radius:50%;background:rgba(0,0,0,.12);box-shadow:inset 0 1px 0 rgba(0,0,0,.15);transition:background .2s,transform .25s cubic-bezier(.2,1.6,.4,1)}
+html[data-theme="dark"] .pips i{background:rgba(255,255,255,.18)}
+.pips i.on{background:radial-gradient(circle at 35% 35%,#FFF6C8,#FFB020);transform:scale(1.18);box-shadow:0 0 7px rgba(255,180,30,.9)}
+.pips.full i{animation:pipGlow .5s ease-in-out infinite alternate}
+@keyframes pipGlow{to{transform:scale(1.35);box-shadow:0 0 12px 2px rgba(255,200,40,1)}}
+#comboChip{background:linear-gradient(135deg,#FFE29A,#FFB36B);color:#5a2a00;font-weight:800;animation:pop .4s}
+
+/* question card + Hoot's help, tighter */
+#battleView .combat{gap:10px;padding-top:10px}
+#battleView .cL{gap:10px}
+#battleView .qcard{padding:10px 14px}
+#battleView .qcard.qin{animation:qIn .4s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes qIn{from{opacity:0;transform:translateY(14px) scale(.97)}}
+#battleView #qText{margin:4px 0 6px}
+#battleView .qviz{padding:6px}
+#battleView .qviz svg{max-height:108px}
+#battleView .hint{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 10px;min-height:0;padding:8px 10px}
+#battleView .hint .hrow{flex:1 1 240px;min-width:0;gap:8px}
+#battleView .hint .hrow>svg{width:40px;height:40px;animation:owlBob 2.4s ease-in-out infinite}
+@keyframes owlBob{50%{transform:translateY(-3px) rotate(-4deg)}}
+#battleView .hint p{font-size:.86rem}
+#battleView .hint .hex{flex:1 1 100%}
+#battleView .hint .hex:empty{display:none}
+#battleView .hint .hact{flex:0 0 auto;margin:0}
+#battleView .hint .hact .tiers:empty{display:none}
+
+/* answers: more choices, pop in one by one */
+#battleView .answers{gap:10px}
+#battleView .answers.long .ans{min-height:64px;line-height:1.2}
+.answers.fresh .ans{animation:ansIn .45s cubic-bezier(.2,1.4,.4,1) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes ansIn{from{opacity:0;transform:translateY(18px) scale(.8)}}
+.ans:active{transform:translateY(4px) scale(.97)}
+.ans.right{box-shadow:0 0 0 5px rgba(107,209,139,.45),0 6px 0 rgba(0,0,0,.2);animation:rightPop .5s cubic-bezier(.2,1.5,.4,1)}
+@keyframes rightPop{40%{transform:scale(1.12) rotate(-2deg)}}
+.ans.nope{animation:nope .42s ease-out}
+@keyframes nope{20%{transform:translateX(-9px) rotate(-2deg)}40%{transform:translateX(8px) rotate(2deg)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+
+/* fix: the generic .tile card style was turning letter-tile answers cream with white text */
+.ans.tile:where(:not(.soft,.used,.right,.fogged)){background:var(--primary);color:var(--primary-ink);padding:0 6px}
+
+/* landscape tablets: two columns that fit on one screen */
+@media (min-width:900px){
+  #battleView .combat{grid-template-columns:1.15fr 1fr;grid-template-areas:"q e" "q a" "q h";grid-template-rows:auto auto 1fr;align-items:start;column-gap:14px}
+  #battleView .cL,#battleView .cR{display:contents}
+  #battleView .qcard{grid-area:q}
+  #battleView #expr{grid-area:e}
+  #battleView #answers{grid-area:a}
+  #battleView #hint{grid-area:h}
+  #battleView .answers .ans{min-height:76px}
+}
+/* phones */
+@media (max-width:640px){#battleView .stage{height:clamp(214px,31vh,260px)}}
+@media (max-width:640px),(max-height:520px){
+  #battleView .stage{margin-top:8px}
+  #battleView .sprite{bottom:54px}
+  .plate{padding:4px 7px 6px;width:clamp(128px,40%,200px);bottom:6px}
+  .plate .pn{font-size:.74rem}
+  .plate .bar{height:14px}
+  .pips i{width:10px;height:10px}
+  #battleView .hint .hrow>svg{width:34px;height:34px}
+}
+
+/* --- fighters: richer motion --- */
+.sprite.dash>svg{filter:drop-shadow(-16px 0 0 rgba(255,255,255,.5)) drop-shadow(-30px 0 0 rgba(255,255,255,.22))}
+.sprite.hitflash>svg{filter:brightness(2.3) saturate(.25)!important}
+.sprite.charging>svg{animation:charge .09s linear infinite!important;filter:drop-shadow(0 0 10px #FFD166) drop-shadow(0 0 22px #FFB020)}
+@keyframes charge{25%{transform:translate(-2px,1px)}75%{transform:translate(2px,-1px)}}
+.sprite.windup>svg{filter:drop-shadow(0 0 12px rgba(255,90,90,.9))}
+.sprite.windup .m-eyes{transform:scaleY(.72)!important}
+.sprite.ko>svg{transform-origin:50% 92%;animation:koFall .55s cubic-bezier(.5,0,.7,1) forwards!important}
+@keyframes koFall{40%{transform:rotate(8deg)}100%{transform:rotate(-78deg) translate(-8px,14px);opacity:.85}}
+.sprite.monster.weak .m-all{animation-duration:4.6s!important}
+.sprite.monster.weak:not(.shielded)::after{content:"💧";position:absolute;right:20%;top:6%;font-size:1.25rem;animation:sweat 1.5s ease-in infinite;pointer-events:none}
+@keyframes sweat{0%{transform:translateY(-4px) scale(.6);opacity:0}25%{opacity:1;transform:none}100%{transform:translateY(22px) scale(.8);opacity:0}}
+.sprite.monster.big:not(.shielded)::before{content:"";position:absolute;left:4%;right:4%;bottom:-2%;height:18%;border-radius:50%;background:radial-gradient(closest-side,rgba(183,140,255,.65),rgba(183,140,255,0));animation:bossAura 1.8s ease-in-out infinite;pointer-events:none;z-index:-1}
+@keyframes bossAura{50%{transform:scale(1.18,1.3);opacity:.7}}
+.mon-svg .m-shadow{transform-box:fill-box;transform-origin:50% 50%;animation:shadowBreathe 2.8s ease-in-out infinite}
+.hero-svg .h-legs{transform-box:view-box;transform-origin:100px 220px}
+
+/* fx extras */
+.fxdust{position:absolute;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 0 6px rgba(255,255,255,.6)}
+.fxorb{position:absolute;left:-19px;top:-19px;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0,var(--c) 42%,transparent 72%);box-shadow:0 0 18px 6px var(--c);z-index:6}
+.fxowl{position:absolute;left:0;top:0;width:72px;z-index:7;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.fxowl svg{width:100%;height:auto;display:block;animation:owlFlap .18s ease-in-out infinite alternate}
+@keyframes owlFlap{to{transform:scaleY(.9) translateY(2px)}}
+.fxnum.crit{animation:none}
+
+/* --- modals: springy open --- */
+.overlay.on{animation:ovIn .22s ease-out}
+.overlay.on .sheet{animation:sheetIn .42s cubic-bezier(.2,1.25,.4,1)}
+@keyframes ovIn{from{opacity:0}}
+@keyframes sheetIn{from{opacity:0;transform:translateY(26px) scale(.92)}}
+.win .wstars i.on{animation:starPop .55s cubic-bezier(.2,1.6,.4,1) both}
+.win .wstars i.on:nth-child(1){animation-delay:.38s}
+.win .wstars i.on:nth-child(2){animation-delay:.61s}
+.win .wstars i.on:nth-child(3){animation-delay:.84s}
+@keyframes starPop{0%{transform:scale(0) rotate(-70deg);opacity:0}70%{transform:scale(1.4) rotate(10deg);opacity:1}100%{transform:none;opacity:1}}
+.win .gain{animation:gainIn .5s 1.1s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes gainIn{from{transform:scale(.3);opacity:0}}
+.win .wa-m{animation:monBye 2.2s ease-in-out infinite}
+@keyframes monBye{50%{transform:translateY(-4px) rotate(-4deg)}}
+.win .kon{background:var(--hint);color:var(--hint-ink);border-radius:14px;padding:8px 12px;margin:8px 0 0;font-size:.84rem}
+.btn:active,.chip:active{transform:scale(.95)}
+
+@media (prefers-reduced-motion:reduce){.answers.fresh .ans,.overlay.on .sheet,.overlay.on,.win .wstars i.on,.win .gain,.plate.low,.plate.low .bar i,.musbtn svg,#battleView .hint .hrow>svg{animation:none!important}}
+html[data-sensory="1"] .answers.fresh .ans,html[data-sensory="1"] .plate.low,html[data-sensory="1"] .plate.low .bar i,html[data-sensory="1"] .sprite.monster.big::before,html[data-sensory="1"] .sprite.monster.weak::after{animation:none!important}
+
+/* ================= v7.3 ================= */
+/* red close buttons (every modal + the battle) */
+.mclose{background:#E5383B;color:#fff;border:3px solid #fff;box-shadow:0 3px 0 #A4161A,0 6px 14px rgba(120,20,20,.35)}
+.mclose:active{background:#C92A2D;box-shadow:0 1px 0 #A4161A}
+
+/* level modal: compact stars, solve and answer sections */
+#briefSheet .bsec{margin:8px 0 3px;font-size:.88rem}
+#briefSheet .goal{font-size:.9rem;line-height:1.35}
+#briefSheet .stylebar{gap:6px}
+#briefSheet .stylebar .chip{min-height:38px;padding:0 4px;font-size:.78rem;white-space:nowrap;gap:4px;box-shadow:0 3px 0 rgba(0,0,0,.13)}
+#briefSheet .brief-actions{margin-top:10px}
+
+/* new hero idle: a relaxed hop-in-place with a swinging pencil arm */
+@keyframes idleBody{0%,58%,100%{transform:translateY(0)}9%,44%{transform:translateY(3px)}27%{transform:translateY(-18px)}}
+@keyframes idleLegs{0%,58%,100%{transform:translateY(0)}27%{transform:translateY(-18px)}}
+@keyframes idleTorso{0%,58%,100%{transform:scale(1,1)}9%,44%{transform:scale(1.03,.97)}27%{transform:translateY(-18px) scale(.99,1.01)}}
+@keyframes idleCape{0%,58%,100%{transform:translateY(0) rotate(0)}9%,44%{transform:translateY(3px) rotate(0)}27%{transform:translateY(-18px) rotate(5deg) scaleX(1.05)}72%{transform:rotate(-2deg)}}
+@keyframes idleArmR{0%,58%,100%{transform:translateY(0) rotate(0)}9%,44%{transform:translateY(3px) rotate(5deg)}27%{transform:translateY(-18px) rotate(-18deg)}36%{transform:translateY(-8px) rotate(10deg)}}
+@keyframes idleArmL{0%,58%,100%{transform:translateY(0) rotate(0)}9%,44%{transform:translateY(3px) rotate(-4deg)}27%{transform:translateY(-18px) rotate(14deg)}36%{transform:translateY(-8px) rotate(-8deg)}}
+@keyframes idleShadow{0%,58%,100%{transform:scale(1);opacity:1}9%,44%{transform:scale(1.06)}27%{transform:scale(.7);opacity:.5}}
+.hero-svg .h-torso{animation:idleTorso 2.8s ease-in-out infinite}
+.hero-svg .h-head{animation:idleBody 2.8s ease-in-out infinite}
+.hero-svg .h-cape{animation:idleCape 2.8s ease-in-out infinite}
+.hero-svg .h-legs{animation:idleLegs 2.8s ease-in-out infinite}
+.hero-svg .h-armR{animation:idleArmR 2.8s ease-in-out infinite}
+.hero-svg .h-armL{animation:idleArmL 2.8s ease-in-out infinite}
+.hero-svg .h-shadow{animation:idleShadow 2.8s ease-in-out infinite}
+
+/* battle on phones: answers right under the question, smaller solve area and speaker buttons */
+@media (max-width:640px),(max-height:520px){
+  #battleView .speak{width:34px;height:34px;font-size:1rem;box-shadow:0 2px 0 rgba(0,0,0,.12)}
+  #battleView .combat{display:flex;flex-direction:column}
+  #battleView .cL,#battleView .cR{display:contents}
+  #battleView .qcard{order:1}
+  #battleView #expr{order:2}
+  #battleView #answers{order:3;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 14px)}
+  #battleView #hint{order:4}
+  #battleView .qviz{padding:4px}
+  #battleView .qviz svg{max-height:84px}
+  .mp-host{padding:6px}
+  .mp-trk{margin-bottom:4px}
+  .tmat{min-height:76px;gap:6px}
+  .tcol{padding:4px;border-width:2px}
+  .tlab{font-size:.68rem;margin-bottom:2px}
+  .tbl{min-height:44px;gap:3px}
+  .blk.cube{width:16px;height:16px}
+  .blk.rod{width:50px;height:11px}
+  .blk.flat{width:42px;height:42px}
+  .ublk{width:20px;height:20px}
+  .uslot{min-height:22px}
+  .mp-bar{gap:6px;margin-top:4px}
+  .mp-bar .btn{min-height:36px;padding:0 12px;font-size:.82rem}
+  .mp-stamp{min-width:44px;min-height:40px;padding:2px 8px}
+  .mp-info{min-width:110px}
+  .mp-info small{font-size:.66rem;line-height:1.2}
+  .fpiece{min-height:46px;font-size:1rem}
+  .mp-cuts{margin-top:6px;gap:6px}
+  .mp-cuts .chip,.mp-cuts .btn{min-height:36px}
+}
+
+@media (max-width:640px),(max-height:520px){
+  .mp-info{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:0 6px}
+  .mp-info b{font-size:.86rem}
+  .mp-info small{flex:1 1 100%}
+  .mp-cuts{font-size:.8rem}
+  .mp-cuts .chip{min-width:34px;padding:0 8px;font-size:.8rem}
+  .fpiece{min-height:40px}
+}
+@media (max-width:640px),(max-height:520px){.eq{font-size:1.45rem;padding:8px 6px}}
+
+/* ================= v9: Studies = coloured subject cards + lesson list modal ================= */
+.subjects{grid-template-columns:repeat(2,1fr);gap:12px}
+.subject{--c:var(--primary);background:var(--c);color:#fff;border:3px solid rgba(255,255,255,.55);min-height:112px;justify-content:center;gap:4px;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.18),var(--shadow)}
+.subject b{font-family:var(--font-display);font-size:1.02rem;line-height:1.15;text-shadow:0 1px 0 rgba(0,0,0,.2)}
+.subject small{color:#fff;opacity:.92;font-weight:700}
+.subject:active{transform:translateY(2px)}
+.lessonlist .lhead h2{color:var(--c,var(--ink))}
+.lessonlist .lcard{border-left:6px solid var(--c,var(--primary))}
+.lessonlist .lgrid{grid-template-columns:1fr 1fr}
+@media (max-width:420px){.lessonlist .lgrid{grid-template-columns:1fr}}
+
+/* ================= v10: armory try-on preview ================= */
+.items .item{cursor:pointer;position:relative;transition:transform .15s,box-shadow .15s}
+.item-pv{display:block;width:100%;background:none;border:0;padding:0;color:inherit;position:relative}
+.item-pv svg{display:block;width:100%}
+.item.trying{outline:4px solid var(--primary);outline-offset:-2px;transform:translateY(-2px)}
+.pv-badge{position:absolute;left:6px;top:6px;background:var(--primary);color:#fff;font-weight:800;font-size:.72rem;padding:3px 9px;border-radius:99px}
+.arm-top .preview.is-pv{outline:4px dashed var(--primary);outline-offset:4px;border-radius:24px}
+.pv-banner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0;padding:10px 14px;border-radius:var(--r);background:var(--surface);border:3px solid var(--primary);box-shadow:var(--shadow)}
+.pv-banner>div{flex:1 1 140px;display:flex;flex-direction:column;min-width:0}
+.pv-banner small{color:var(--muted);overflow-wrap:anywhere}
+.pv-banner .btn{flex:none}
+.pv-ico{font-size:1.5rem}
+.pvd{font-size:.8rem;margin-left:4px}.pvd.up{color:#1B8A4B}.pvd.dn{color:#C23030}
+
+/* ================= v10: cinematic chapters ================= */
+#comicOverlay.on{display:block;position:fixed;inset:0;z-index:65;background:#000;padding:0}
+#comicOverlay .mwrap{position:absolute;inset:0;width:100%;max-width:none;padding:0;display:block}
+#comicOverlay .mclose{top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;z-index:8}
+#comicOverlay .sheet.cine{position:relative;width:100%;height:100%;max-height:none;padding:0;margin:0;border:0;border-radius:0;background:#000;color:#fff;overflow:hidden;animation:none;box-shadow:none}
+.cine .cn-stage{position:absolute;inset:0;overflow:hidden;background:linear-gradient(var(--sky,#456),var(--gr,#234));cursor:pointer;animation:cnFade .7s ease-out backwards}
+.cine .cn-stage>svg{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:50% 55%;animation:var(--kb,cnZin) 12s ease-out forwards}
+.cine .cn-zin{--kb:cnZin}.cine .cn-zout{--kb:cnZout}.cine .cn-panl{--kb:cnPanl}.cine .cn-panr{--kb:cnPanr}
+.cine .cn-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%),linear-gradient(to bottom,rgba(0,0,0,.55),transparent 18%,transparent 52%,rgba(0,0,0,.82))}
+.cine.paused .cn-stage>svg,.cine.paused .cn-stage>svg *{animation-play-state:paused!important}
+.cine .cn-bar{position:absolute;left:0;right:0;z-index:4;padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px))}
+.cine .cn-bar.top{top:0;padding-top:calc(env(safe-area-inset-top,0px) + 12px);padding-right:70px}
+.cine .cn-bar.bot{bottom:0;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;flex-direction:column;gap:12px;align-items:center}
+.cine .cn-seg{display:flex;gap:4px}
+.cine .cn-seg i{position:relative;flex:1;height:4px;border-radius:9px;background:rgba(255,255,255,.3);overflow:hidden}
+.cine .cn-seg i.done::after,.cine .cn-seg i.now::after{content:"";position:absolute;inset:0;background:#fff;border-radius:9px}
+.cine .cn-seg i.now::after{transform-origin:0 50%;animation:cnProg var(--d,4s) linear forwards}
+.cine.paused .cn-seg i.now::after{animation-play-state:paused}
+.cine .cn-chap{display:block;margin-top:8px;font-weight:800;font-size:.95rem;text-shadow:0 2px 6px #000}
+.cine .cn-chap small{opacity:.8;font-weight:600;margin-left:8px}
+.cine .cn-sub{margin:0;max-width:min(760px,100%);text-align:center;font-weight:800;font-size:clamp(1.05rem,2.4vw + .5rem,1.7rem);line-height:1.4;text-shadow:0 2px 8px #000,0 0 2px #000;animation:cnUp .8s .25s ease-out backwards}
+.cine .cn-title{text-align:center;padding-bottom:30px;animation:cnUp .9s ease-out backwards}
+.cine .cn-title small{display:block;letter-spacing:.2em;text-transform:uppercase;font-weight:800;opacity:.85}
+.cine .cn-title h2{margin:6px 0 0;font-size:clamp(2rem,7vw,3.6rem);text-shadow:0 3px 14px #000}
+.cine .cn-ctl{display:flex;gap:10px;width:min(560px,100%);align-items:stretch}
+.cine .cn-ctl .btn.big{flex:1}
+.cine .cn-ctl .btn.icon{flex:none;min-width:var(--tap);padding:0 14px}
+.cine .cn-ctl .btn.icon svg{width:20px;height:20px;display:block;margin:0 auto}
+.cine .cn-ctl .btn.skip{flex:none}
+.cine .cn-ctl .btn.ghost{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.7)}
+.cn-float{animation:cnFloat 3.2s ease-in-out infinite}
+.cn-stand{animation:cnFloat 2.6s ease-in-out infinite}
+.cn-drift{animation:cnDrift 24s linear infinite alternate}
+.cn-sun{animation:cnPulse 4s ease-in-out infinite}
+.cine svg text{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes cnFade{from{opacity:0}}
+@keyframes cnUp{from{opacity:0;transform:translateY(14px)}}
+@keyframes cnProg{from{transform:scaleX(0)}}
+@keyframes cnZin{from{transform:scale(1)}to{transform:scale(1.14)}}
+@keyframes cnZout{from{transform:scale(1.16)}to{transform:scale(1)}}
+@keyframes cnPanl{from{transform:scale(1.14) translateX(3%)}to{transform:scale(1.14) translateX(-3%)}}
+@keyframes cnPanr{from{transform:scale(1.14) translateX(-3%)}to{transform:scale(1.14) translateX(3%)}}
+@keyframes cnFloat{50%{transform:translateY(-4px)}}
+@keyframes cnDrift{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+@keyframes cnPulse{50%{opacity:.7}}
+@media (max-height:520px){.cine .cn-sub{font-size:1rem}.cine .cn-bar.bot{gap:6px;padding-bottom:8px}}
+@media (prefers-reduced-motion:reduce){.cine .cn-stage>svg,.cine .cn-stage,.cn-float,.cn-stand,.cn-drift,.cn-sun,.cine .cn-sub,.cine .cn-title{animation:none!important}.cine .cn-seg i.now::after{animation-duration:var(--d,4s)!important}}

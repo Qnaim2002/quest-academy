@@ -1,0 +1,46 @@
+/* ================= v23 ================= */
+/* a compact tracing pad in battle: the canvas with the two buttons beside it */
+#battleView .trace{grid-template-columns:auto auto;grid-template-areas:"cv bar" "msg msg";align-items:center;justify-content:center;column-gap:12px;row-gap:4px}
+#battleView .trace .trcv{grid-area:cv;border-radius:14px}
+#battleView .trace .trbar{grid-area:bar;flex-direction:column;flex-wrap:nowrap}
+#battleView .trace .trbar .btn{min-height:52px;padding:6px 14px;font-size:.95rem}
+#battleView .trace .trmsg{grid-area:msg;font-size:.9rem}
+html[data-pixel="1"] #battleView .trace .trcv{border-radius:0}
+
+/* ---- the level card (brief), simpler ---- */
+#briefSheet .bfoe{display:grid;justify-items:center;text-align:center;gap:2px;margin:4px 0 10px}
+#briefSheet .bfoe-av{width:132px;height:132px}
+#briefSheet .bfoe-av svg{width:100%;height:100%;display:block}
+#briefSheet .bfoe.boss .bfoe-av{width:156px;height:156px}
+#briefSheet .bfoe-n{font-size:1.15rem;line-height:1.2}
+#briefSheet .bfoe-goal{margin:2px 0 0;color:var(--muted);font-size:.9rem;max-width:34ch}
+#briefSheet .bgoals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 12px}
+#briefSheet .bgoal{display:grid;justify-items:center;gap:1px;padding:8px 4px;border-radius:14px;background:var(--surface2);text-align:center}
+#briefSheet .bgoal i{font-style:normal;font-size:1.4rem;line-height:1}
+#briefSheet .bgoal b{font-size:.74rem;line-height:1.15}
+#briefSheet .bgoal em{font-style:normal;font-size:1.05rem;color:var(--muted);opacity:.6}
+#briefSheet .bgoal.got{box-shadow:inset 0 0 0 2px #FFC93C}
+#briefSheet .bgoal.got em{color:#FFC93C;opacity:1}
+#briefSheet .brief-actions{margin:0 0 6px}
+#briefSheet .bopts{margin-top:6px;border-radius:14px;background:var(--surface2);padding:2px 12px}
+#briefSheet .bopts summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:800;color:var(--muted);list-style:none}
+#briefSheet .bopts summary::-webkit-details-marker{display:none}
+#briefSheet .bopts summary::after{content:'▾';margin-left:auto}
+#briefSheet .bopts[open] summary::after{content:'▴'}
+#briefSheet .bopts[open]{padding-bottom:10px}
+html[data-pixel="1"] #briefSheet .bgoal,html[data-pixel="1"] #briefSheet .bopts{border-radius:0}
+
+/* ---- the victory card, simpler ---- */
+#winSheet .wline{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:6px 0 2px}
+#winSheet .wline .gain{margin:0}
+#winSheet .wchip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border-radius:999px;border:2px solid #FFC93C;background:color-mix(in srgb,#FFC93C 16%,var(--surface));color:var(--ink);font:inherit;font-weight:800;font-size:.9rem;cursor:pointer}
+#winSheet .wtip{margin:6px auto 0;max-width:36ch;font-size:.92rem;color:var(--muted);text-align:center}
+#winSheet .wtip.all{color:#FFC93C;font-weight:800}
+#winSheet .wbtns{display:grid;gap:8px;margin-top:12px;justify-items:center}
+#winSheet .wbtns .btn.big{min-width:min(100%,260px)}
+#winSheet .wsmall{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#winSheet .wsmall .btn{min-height:48px;padding:6px 14px;font-size:.95rem}
+html[data-pixel="1"] #winSheet .wchip{border-radius:0}
+/* the big letter above the pad is only a reminder in battle: keep it small */
+#battleView .trglyph{font-size:clamp(40px,11vw,60px);line-height:1}
+#battleView #qViz:has(.trglyph){min-height:0;padding:2px 0}

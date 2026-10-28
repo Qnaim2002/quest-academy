@@ -1,0 +1,10 @@
+/* ================= v30: smoother on slow devices ================= */
+/* "lite" is switched on when the game measures a slow device (or the family picks Lite in the Parent Portal).
+   It stops the purely decorative loops (twinkles, drifting clouds, sun rays, sparkles) that repaint the screen
+   all the time. Characters still breathe and move; only the background "busy" effects rest. */
+html[data-lite="1"] :is(.twinkle,.rise,.ringspin,.orbit,.sc-far,.cn-drift,.cn-sun,.cm-tw,.ped,.arena-sky .rays,.lp-pic .pe0),
+html[data-lite="1"] .cine :is(.cn-par1,.cn-par2,.cn-twk,.cn-ember,.cn-rays,.cn-fall,.cn-rise,.cn-drift,.cn-glowp,.cn-shadow),
+html[data-lite="1"] .cine svg :is(.cn-orbit,.cn-spin,.cn-speed path),
+html[data-lite="1"] :is(.room-win,.mc-holo)::after,
+html[data-lite="1"] #battleView .ans::after{animation:none!important}
+html[data-lite="1"] .overlay{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(11,9,25,.74)}

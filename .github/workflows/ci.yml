@@ -1,0 +1,47 @@
+# v34: every push and pull request is checked the same way you check it by hand.
+name: checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check          # data and strings
+      - run: npm run lint:bank      # question bank, Malay text and review list
+      - run: npm test               # unit tests (saves, migrations, every feature)
+      - run: npm run build
+      - run: npm run budget         # size limits (budget.json)
+  browser:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e            # smoke, every subject and age, parent area, offline mode, low-end speed test
+        env:
+          CI: 'true'
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx --yes @lhci/cli@0.14.x autorun --config=lighthouserc.json

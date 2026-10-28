@@ -1,0 +1,57 @@
+/* v34 audit: more Music questions. Row = [topic, emoji, EN question, EN answer, [3 EN wrong], BM question, BM answer, [3 BM wrong]]. */
+export const names = {};
+export default function (f) {
+  f('mz', 1, [
+    ['bunyi', '🔔', 'Which sound is loud?', 'A drum', ['A whisper', 'A falling leaf', 'A sleeping cat'], 'Bunyi manakah kuat?', 'Gendang', ['Bisikan', 'Daun gugur', 'Kucing tidur']],
+    ['bunyi', '🤫', 'Which sound is soft?', 'A whisper', ['A thunder clap', 'A siren', 'A drum bang'], 'Bunyi manakah lembut?', 'Bisikan', ['Guruh', 'Siren', 'Dentuman gendang']],
+    ['bunyi', '🐶', 'What sound does a dog make?', 'Woof', ['Meow', 'Moo', 'Quack'], 'Apakah bunyi anjing?', 'Guk guk', ['Meow', 'Moo', 'Kuak']],
+    ['bunyi', '🐱', 'What sound does a cat make?', 'Meow', ['Woof', 'Moo', 'Oink'], 'Apakah bunyi kucing?', 'Meow', ['Guk', 'Moo', 'Oink']],
+    ['bunyi', '🌧️', 'Which sound do we hear when it rains?', 'Pitter patter', ['Beep beep', 'Roar', 'Ding dong'], 'Apakah bunyi yang kita dengar apabila hujan?', 'Rintik-rintik', ['Bip bip', 'Raungan', 'Ding dong']],
+    ['bunyi', '👂', 'What part of the body do we use to hear music?', 'Ears', ['Nose', 'Elbows', 'Knees'], 'Anggota badan manakah yang kita guna untuk mendengar muzik?', 'Telinga', ['Hidung', 'Siku', 'Lutut']],
+    ['alat', '🥁', 'Which instrument do we hit with sticks?', 'Drum', ['Flute', 'Violin', 'Trumpet'], 'Alat muzik manakah yang kita pukul dengan kayu?', 'Dram', ['Seruling', 'Biola', 'Trompet']],
+    ['alat', '🎹', 'Which instrument has black and white keys?', 'Piano', ['Drum', 'Triangle', 'Flute'], 'Alat muzik manakah mempunyai kekunci hitam dan putih?', 'Piano', ['Dram', 'Segi tiga', 'Seruling']],
+    ['alat', '🎸', 'Which instrument has strings we pluck?', 'Guitar', ['Drum', 'Bell', 'Whistle'], 'Alat muzik manakah mempunyai tali yang kita petik?', 'Gitar', ['Dram', 'Loceng', 'Wisel']],
+    ['alat', '🎺', 'We blow into a…', 'Trumpet', ['Piano', 'Drum', 'Guitar'], 'Kita meniup…', 'Trompet', ['Piano', 'Dram', 'Gitar']],
+    ['alat', '🔔', 'Which instrument do we shake or ring?', 'Bell', ['Piano', 'Violin', 'Drum stick'], 'Alat muzik manakah yang kita goncang atau bunyikan?', 'Loceng', ['Piano', 'Biola', 'Kayu dram']],
+    ['alat', '🎻', 'Which instrument do we play with a bow?', 'Violin', ['Drum', 'Triangle', 'Whistle'], 'Alat muzik manakah yang kita main dengan alat penggesek?', 'Biola', ['Dram', 'Segi tiga', 'Wisel']],
+    ['alat', '🪇', 'Shaking a maraca makes a…', 'Rattling sound', ['Silent sound', 'Barking sound', 'Singing voice'], 'Menggoncang maraca menghasilkan…', 'Bunyi berdesir', ['Bunyi senyap', 'Bunyi menyalak', 'Suara nyanyian']],
+    ['irama', '👏', 'Clap along to the beat. What do we keep?', 'A steady beat', ['A wrong note', 'Silence', 'A loud shout'], 'Bertepuk mengikut rentak. Apa yang kita kekalkan?', 'Rentak yang tetap', ['Not yang salah', 'Senyap', 'Jeritan kuat']],
+    ['irama', '🐆', 'A cheetah runs fast, so the music is…', 'Fast', ['Slow', 'Sleepy', 'Still'], 'Cheetah berlari laju, jadi muziknya…', 'Laju', ['Perlahan', 'Mengantuk', 'Diam']],
+    ['irama', '🛌', 'Which music is good for sleeping?', 'A soft lullaby', ['A loud rock song', 'A siren', 'A drum solo'], 'Muzik manakah sesuai untuk tidur?', 'Dodoi yang lembut', ['Lagu rock yang kuat', 'Siren', 'Solo dram']],
+    ['irama', '💃', 'Which music makes us want to dance?', 'Happy, lively music', ['Total silence', 'A very sad tune', 'A snoring sound'], 'Muzik manakah membuat kita mahu menari?', 'Muzik riang dan rancak', ['Senyap sepenuhnya', 'Lagu yang sangat sedih', 'Bunyi berdengkur']],
+    ['nada', '🎵', 'A high note sounds like a…', 'Little bird', ['Big lion', 'Thunder', 'Truck'], 'Not tinggi berbunyi seperti…', 'Burung kecil', ['Singa besar', 'Guruh', 'Lori']],
+    ['nada', '🐘', 'A low note sounds like a…', 'Big elephant', ['Tiny mouse', 'Little bird', 'Mosquito'], 'Not rendah berbunyi seperti…', 'Gajah besar', ['Tikus kecil', 'Burung kecil', 'Nyamuk']],
+    ['lagu', '🎤', 'What do we call it when we use our voice to make music?', 'Singing', ['Painting', 'Cooking', 'Reading'], 'Apakah namanya apabila kita menggunakan suara untuk membuat muzik?', 'Menyanyi', ['Melukis', 'Memasak', 'Membaca']],
+    ['lagu', '🌟', 'Which song do we sing about a star?', 'Twinkle, Twinkle, Little Star', ['Row, Row, Row Your Boat', 'Old MacDonald', 'Happy Birthday'], 'Lagu manakah kita nyanyikan tentang bintang?', 'Twinkle, Twinkle, Little Star', ['Row, Row, Row Your Boat', 'Old MacDonald', 'Selamat Hari Jadi']],
+    ['lagu', '🎂', 'Which song do we sing on a birthday?', 'Happy Birthday', ['Negaraku', 'A rain song', 'A bedtime lullaby'], 'Lagu manakah kita nyanyikan pada hari lahir?', 'Selamat Hari Jadi', ['Negaraku', 'Lagu hujan', 'Dodoi tidur']],
+    ['lagu', '🚣', 'Which song talks about a boat?', 'Row, Row, Row Your Boat', ['Twinkle, Twinkle', 'Happy Birthday', 'Negaraku'], 'Lagu manakah bercerita tentang sebuah bot?', 'Row, Row, Row Your Boat', ['Twinkle, Twinkle', 'Selamat Hari Jadi', 'Negaraku']],
+    ['lagu', '🧸', 'When do we sing a lullaby?', 'When it is time to sleep', ['During a race', 'When swimming', 'When running'], 'Bilakah kita menyanyikan lagu dodoi?', 'Apabila tiba masa tidur', ['Semasa perlumbaan', 'Semasa berenang', 'Semasa berlari']]
+  ]);
+  f('mz', 3, [
+    ['lagu', '🇲🇾', 'What is the title of Malaysia’s national anthem?', 'Negaraku', ['Rasa Sayang', 'Dayung Sampan', 'Jalur Gemilang'], 'Apakah tajuk lagu kebangsaan Malaysia?', 'Negaraku', ['Rasa Sayang', 'Dayung Sampan', 'Jalur Gemilang']],
+    ['lagu', '🎼', 'Which folk song from Malaysia is “Rasa Sayang”?', 'A well-known traditional Malay folk song', ['A rock song', 'A robot song', 'A lullaby from Japan'], 'Apakah lagu “Rasa Sayang”?', 'Lagu rakyat Melayu tradisional yang terkenal', ['Lagu rock', 'Lagu robot', 'Lagu dodoi dari Jepun']],
+    ['lagu', '🎶', 'A folk song is…', 'A song passed down through families and communities', ['A song only for robots', 'A song with no words', 'A song for one person only'], 'Lagu rakyat ialah…', 'Lagu yang diwarisi melalui keluarga dan masyarakat', ['Lagu untuk robot sahaja', 'Lagu tanpa lirik', 'Lagu untuk seorang sahaja']],
+    ['lagu', '🧑‍🤝‍🧑', 'When many people sing together, it is called a…', 'Choir', ['Solo', 'Duet', 'Echo'], 'Apabila ramai orang menyanyi bersama, ia dipanggil…', 'Koir', ['Solo', 'Duet', 'Gema']],
+    ['lagu', '🥇', 'Singing alone is called a…', 'Solo', ['Choir', 'Band', 'Chorus'], 'Menyanyi seorang diri dipanggil…', 'Solo', ['Koir', 'Kumpulan muzik', 'Korus']],
+    ['lagu', '👫', 'Two people singing together is called a…', 'Duet', ['Solo', 'Choir', 'Orchestra'], 'Dua orang menyanyi bersama dipanggil…', 'Duet', ['Solo', 'Koir', 'Orkestra']],
+    ['lagu', '🎙️', 'Which should we do before singing?', 'Warm up our voice and sit or stand tall', ['Eat spicy food', 'Shout loudly', 'Lie on the floor'], 'Apakah yang patut kita buat sebelum menyanyi?', 'Memanaskan suara dan duduk atau berdiri tegak', ['Makan makanan pedas', 'Menjerit kuat', 'Berbaring di lantai']],
+    ['lagu', '🪶', 'Which song is often sung at national day celebrations?', 'Patriotic songs like “Sehati Sejiwa”', ['Lullabies only', 'Funeral songs', 'Songs about food only'], 'Lagu manakah selalu dinyanyikan pada sambutan hari kebangsaan?', 'Lagu patriotik seperti “Sehati Sejiwa”', ['Lagu dodoi sahaja', 'Lagu pengebumian', 'Lagu tentang makanan sahaja']],
+    ['alat', '🪕', 'Which instrument is the gamelan part of?', 'A group of gongs and metallophones', ['A single violin', 'A set of recorders', 'A piano'], 'Gamelan terdiri daripada…', 'Sekumpulan gong dan metalofon', ['Sebuah biola', 'Satu set rekoder', 'Piano']],
+    ['alat', '🥁', 'The rebana is a…', 'Frame drum used in traditional music', ['Wind instrument', 'String instrument', 'Keyboard'], 'Rebana ialah…', 'Gendang berbingkai dalam muzik tradisional', ['Alat tiupan', 'Alat tali', 'Papan kekunci']],
+    ['alat', '🎶', 'The kompang is played during…', 'Weddings and celebrations', ['Swimming lessons', 'Cooking class', 'Night sleep'], 'Kompang dimainkan semasa…', 'Majlis perkahwinan dan sambutan', ['Kelas berenang', 'Kelas memasak', 'Tidur malam']],
+    ['alat', '🪈', 'Which is a wind instrument?', 'Recorder', ['Drum', 'Guitar', 'Harp'], 'Yang manakah alat muzik tiupan?', 'Rekoder', ['Dram', 'Gitar', 'Kecapi']],
+    ['alat', '🎻', 'Which is a string instrument?', 'Violin', ['Flute', 'Drum', 'Triangle'], 'Yang manakah alat muzik bertali?', 'Biola', ['Seruling', 'Dram', 'Segi tiga']],
+    ['alat', '🥁', 'Which is a percussion instrument?', 'Drum', ['Flute', 'Trumpet', 'Violin'], 'Yang manakah alat muzik perkusi?', 'Dram', ['Seruling', 'Trompet', 'Biola']],
+    ['alat', '🏮', 'The erhu is a traditional Chinese…', 'Two-string bowed instrument', ['Wind chime', 'Big drum', 'Keyboard'], 'Erhu ialah alat muzik tradisional Cina yang…', 'Bertali dua dan digesek', ['Loceng angin', 'Gendang besar', 'Papan kekunci']],
+    ['bunyi', '🔊', 'Making a sound louder or softer is changing the…', 'Volume', ['Colour', 'Taste', 'Size'], 'Membuat bunyi lebih kuat atau lebih perlahan ialah mengubah…', 'Kelantangan', ['Warna', 'Rasa', 'Saiz']],
+    ['bunyi', '🎚️', 'Soft music is called…', 'Piano (p)', ['Forte (f)', 'Fast', 'Slow'], 'Muzik yang lembut dipanggil…', 'Piano (p)', ['Forte (f)', 'Laju', 'Perlahan']],
+    ['bunyi', '📢', 'Loud music is called…', 'Forte (f)', ['Piano (p)', 'Rest', 'Silent'], 'Muzik yang kuat dipanggil…', 'Forte (f)', ['Piano (p)', 'Rehat', 'Senyap']],
+    ['bunyi', '🎧', 'Why should we keep headphones at a low volume?', 'To protect our ears', ['To look cool', 'To save paint', 'To grow taller'], 'Mengapa kita patut memperlahankan volum fon kepala?', 'Untuk melindungi telinga kita', ['Untuk nampak hebat', 'Untuk menjimatkan cat', 'Untuk menjadi tinggi']],
+    ['nada', '🎼', 'The order of seven notes Do Re Mi Fa Sol La Ti is called a…', 'Scale', ['Story', 'Poem', 'Map'], 'Susunan tujuh not Do Re Mi Fa Sol La Ti dipanggil…', 'Skala', ['Cerita', 'Puisi', 'Peta']],
+    ['nada', '⬆️', 'Which note comes after Sol in the scale?', 'La', ['Do', 'Re', 'Mi'], 'Not manakah selepas Sol dalam skala?', 'La', ['Do', 'Re', 'Mi']],
+    ['nada', '⬇️', 'Singing from high Do down to low Do goes…', 'Down the scale', ['Up the scale', 'Nowhere', 'Sideways'], 'Menyanyi dari Do tinggi ke Do rendah bergerak…', 'Menurun dalam skala', ['Menaik dalam skala', 'Tidak ke mana-mana', 'Ke tepi']],
+    ['nada', '🎵', 'Which note is higher: Mi or Sol?', 'Sol', ['Mi', 'They are the same', 'Neither'], 'Not manakah lebih tinggi: Mi atau Sol?', 'Sol', ['Mi', 'Sama sahaja', 'Tiada satu pun']],
+    ['irama', '⏱️', 'The speed of music is called the…', 'Tempo', ['Colour', 'Volume', 'Pitch'], 'Kelajuan muzik dipanggil…', 'Tempo', ['Warna', 'Kelantangan', 'Kenyaringan']],
+    ['irama', '🕺', 'A march has how many beats in a bar?', 'Two or four', ['Seven', 'Nine', 'Eleven'], 'Berapa ketukan dalam satu bar bagi mars?', 'Dua atau empat', ['Tujuh', 'Sembilan', 'Sebelas']]
+  ]);
+}

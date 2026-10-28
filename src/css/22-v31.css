@@ -1,0 +1,123 @@
+/* ================= v31 ================= */
+
+/* ---- smooth stories ----
+   1. The game behind a story is not drawn at all while the story plays (nothing there can change).
+   2. Falling petals, bubbles, embers, confetti, light rays and the dark foreground shapes sit in an HTML layer above
+      the picture and only move with transform/opacity, which the graphics chip handles on its own.
+   3. In pixel mode, the idle loops inside the picture (bobbing, breathing, pulsing) step a few times a second, like
+      sprites in a pixel game, instead of asking for a full repaint of the scene 60 times a second. */
+body:has(#comicOverlay.on) > .app { content-visibility: hidden; }
+.cine .cn-stage > svg.cn-world { will-change: transform; }
+.cn-fxl { position: absolute; inset: 0; pointer-events: none; overflow: hidden; contain: layout paint style; }
+.cn-fxl .fxp { position: absolute; top: -12%; height: 100%; width: var(--w, 4%); animation: fxFall var(--d, 7s) linear infinite; }
+.cn-fxl .fxp.rise { top: 100%; animation-name: fxRise; }
+.cn-fxl .fxp.twk { height: auto; animation: fxTwk var(--d, 2s) ease-in-out infinite; }
+.cn-fxl .fxp > em { display: block; width: 100%; font-style: normal; animation: fxSway calc(var(--d, 7s) / 2.5) ease-in-out infinite alternate; }
+.cn-fxl .fxp.twk > em, .cn-fxl .fxp.ember > em { animation: none; }
+.cn-fxl .fxp img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.cn-fxl .fxp b { display: block; font-weight: 400; line-height: 1; font-size: 18px; font-size: calc(var(--s, 12) * 100vw / 320); }   /* the story stage is as wide as the screen */
+.cn-fxl .fxp i { display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--c, #fff); opacity: .75; }
+.cn-fxl .fxp.conf i { aspect-ratio: 5 / 8; border-radius: 2px; opacity: 1; }
+.cn-fxl .fxp.ember i { box-shadow: 0 0 6px var(--c); opacity: .9; }
+.cn-fxl .fx-rays { position: absolute; inset: -10% -20% 0 30%; display: flex; gap: 6%; transform: skewX(-18deg); opacity: .22; animation: rayPulse 6s ease-in-out infinite; }
+.cn-fxl .fx-rays i { flex: 0 0 7%; background: linear-gradient(#FFF6C8, rgba(255, 246, 200, .2)); }
+.cn-fxl .cn-fgs { position: absolute; inset: 0; width: 100%; height: 100%; transform-origin: 50% 100%; }
+.cine .cn-panl .cn-fgs { animation: fgPanL 12s ease-out forwards; } .cine .cn-panr .cn-fgs { animation: fgPanR 12s ease-out forwards; }
+.cine .cn-zin .cn-fgs { animation: fgZin 12s ease-out forwards; } .cine .cn-zout .cn-fgs { animation: fgZout 12s ease-out forwards; }
+@keyframes fxFall { to { transform: translateY(118%) rotate(var(--rot, 0deg)); } }
+@keyframes fxRise { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-118%); opacity: 0; } }
+@keyframes fxSway { from { transform: translateX(-60%) rotate(-25deg); } to { transform: translateX(60%) rotate(25deg); } }
+@keyframes fxTwk { 0%, 100% { opacity: .25; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.1); } }
+.cn-fxl .fxp.conf { --rot: 540deg; }
+.cine.paused .cn-fxl *, .cine.paused .cn-fxl { animation-play-state: paused !important; }
+/* only the characters keep moving inside the picture; the decorative loops there (bobbing rows of props, glows,
+   twinkles, orbiting sparkles, spinning rays) hold still, so far less has to be redrawn every frame */
+.cine .cn-stage > svg.cn-world :is(.cm-bob, .cn-pulse, .cn-twk, .cm-tw, .cn-orbit, .cn-spin, .cn-glowp, .cn-ring, .cn-sun, .cn-drift, .cn-jump) { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .cn-fxl * { animation: none !important; } }
+html[data-sensory="1"] .cn-fxl, html[data-lite="1"] .cn-fxl .fxp, html[data-lite="1"] .cn-fxl .fx-rays { display: none; }
+/* the speaker's portrait in the dialogue box: the drawing holds still (its sprite loop made the main thread redraw
+   every frame) and the frame around it bobs gently instead, on the graphics chip */
+.cine .cn-port svg, .cine .cn-port svg * { animation: none !important; }
+.cine .cn-port { animation: portBob 2.6s ease-in-out infinite; }
+.cine.paused .cn-port { animation-play-state: paused; }
+@keyframes portBob { 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .cine .cn-port { animation: none; } }
+html[data-sensory="1"] .cine .cn-port { animation: none; }
+/* typing: the words of a line appear one after another (a small timer in 28 adds .on), at the same reading pace as
+   before; nothing is animated per letter or per word any more */
+.cine .cn-sub.jt > span { visibility: hidden; animation: none !important; }
+.cine .cn-sub.jt > span.on { visibility: visible; }
+
+/* ---- a simpler Adventure tab ---- */
+.adv31 .herostrip { grid-template-columns: auto 1fr auto; padding: 8px 12px; gap: 4px 12px; margin-bottom: 10px; }
+.adv31 .herostrip .hs-av { width: 48px; height: 48px; }
+.adv31 .herostrip .hs-av svg { width: 100%; height: 100%; }
+.adv31 .herostrip > :nth-child(3) { grid-column: auto; justify-self: end; }
+.adv31 .herostrip .hs-info b { white-space: nowrap; }
+.adv31 .herostrip > :nth-child(3) small { display: none; }
+.adv31 .adv-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; margin: 4px 0 10px; }
+.adv31 .adv-top .title { margin: 0; }
+.agebar { display: inline-flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.agebar > span { font-weight: 800; color: var(--muted); font-size: .85rem; margin-right: 2px; }
+.agebar .chip { min-width: 40px; min-height: 40px; padding: 4px 10px; justify-content: center; font-size: 1rem; }
+.adv31 .subjgrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.adv31 .sj.sj31 { min-height: 0; padding: 12px 10px 10px 18px; gap: 4px; position: relative; }
+.adv31 .sj.sj31 .em { font-size: 2rem; line-height: 1; }
+.adv31 .sj.sj31 b { font-size: .92rem; line-height: 1.2; }
+.adv31 .sj-st { display: flex; align-items: center; gap: 6px; width: 100%; font-size: .78rem; font-weight: 800; color: var(--muted); }
+.adv31 .sj-bar { flex: 1; height: 6px; border-radius: 9px; background: var(--line, rgba(0, 0, 0, .12)); overflow: hidden; }
+.adv31 .sj-bar u { display: block; height: 100%; background: var(--c); border-radius: 9px; }
+.adv31 .sj.sj31 .offtag { position: absolute; top: 6px; right: 8px; font-size: .9rem; }
+.coopbar31 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.coopbar31 .co-who { font-size: .85rem; color: var(--muted); }
+#coopSheet .co-n { margin: 6px 0 12px; }
+@media (max-width: 380px) { .adv31 .subjgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.lv31 .lvhead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 8px; }
+.lv31 .lvhead .btn { min-width: 44px; padding-inline: 12px; }
+.lv31 .lvhead .title { flex: 1 0 auto; font-size: clamp(1.1rem, 4.6vw, 1.6rem); }
+.lv31 .lvhead .agebar { margin-left: auto; }
+.lv31 .saga31 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 10px; font-size: .85rem; }
+.lv31 .saga31 .sagaline, .lv31 .saga31 .sagaprog { margin: 0; }
+.lv31 .zones { gap: 10px; }
+.lv31 .zone .zhead.scene { aspect-ratio: auto; min-height: 76px; margin: 0; border-radius: 0; }   /* a generic 4:3 picture rule made this banner very tall */
+.lv31 .zone.zslim .zhead.slim { min-height: 0; padding-block: 8px; }
+.lv31 .zone.zslim .zhead.slim .zn-n { font-size: 1.3rem; }
+.lv31 .zone.zslim .zhead.slim small { font-size: .74rem; }
+.lv31 .zone.zlocked.zslim { opacity: .6; }
+.lv31 .zone.zlocked .zbar { display: none; }
+.lv31 .secretnode.locked { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px 8px; padding: 8px 10px; text-align: center; }
+.lv31 .secretnode.locked .sn-orb { font-size: 1.1rem; animation: none; }
+.lv31 .secretnode.locked b { font-size: .85rem; }
+.lv31 .secretnode.locked small { flex-basis: 100%; font-size: .72rem; }
+.lv31 .secretnode.locked .sn-bar { display: none; }
+
+/* ---- mistake review, recovery question, problem log ---- */
+.mxbtn { margin: 4px auto 8px; }
+.mxsheet { max-width: 640px; }
+.mx-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.mx-item { background: var(--surface2, var(--surface)); border-radius: var(--r); padding: 10px 12px; box-shadow: var(--shadow); }
+.mx-top { display: flex; align-items: flex-start; gap: 8px; }
+.mx-em { font-size: 1.8rem; line-height: 1; }
+.mx-q { flex: 1; margin: 0; font-weight: 800; }
+.mx-you, .mx-ok, .mx-why { margin: 6px 0 0; }
+.mx-you b { color: var(--bad, #D9483B); }
+.mx-ok b { color: var(--good, #2E9E5B); }
+.mx-why { font-size: .92rem; }
+.mx-les { margin-top: 6px; }
+.gate.rec .rc-q { font-size: 1.05rem; margin: 10px 0; }
+.gate.rec .rc-in { width: 100%; max-width: 360px; margin: 0 auto; display: block; }
+.gate.rec .rc-erase { margin-top: 14px; text-align: left; }
+.gate.rec .rc-erase summary { cursor: pointer; color: var(--muted); font-weight: 800; }
+.rc-card .rc-form { display: grid; gap: 10px; }
+.rc-card .rc-l { display: grid; gap: 4px; font-weight: 800; font-size: .9rem; }
+.rc-card .rc-sel, .rc-card input { width: 100%; box-sizing: border-box; }
+.rc-card .rc-sel { min-height: 44px; border-radius: 10px; padding: 6px 10px; font: inherit; background: var(--surface); color: var(--ink); border: 2px solid var(--line, rgba(0, 0, 0, .15)); }
+.rc-card .rc-tip { margin: 0; font-size: .8rem; }
+.rc-card .rc-on { margin: 0 0 10px; }
+.rc-card, .crash-card { margin-top: 12px; }
+.crash-card .cr-n { margin: 0 0 6px; font-weight: 800; }
+.crash-card .cr-list { margin: 0 0 10px; padding-left: 18px; display: grid; gap: 4px; }
+.crash-card .cr-list small { display: block; color: var(--muted); font-size: .74rem; }
+.rc-nudge { margin: 8px 0 12px; }
+.gate .pmsg.ok { color: var(--good, #2E9E5B); }

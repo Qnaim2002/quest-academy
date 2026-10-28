@@ -1,0 +1,139 @@
+/* ================= v7.1 additions ================= */
+/* --- modal wrapper + top-right close button (every modal) --- */
+.mwrap{position:relative;width:min(560px,100%);display:flex;justify-content:center;padding-top:50px}
+#comicOverlay .mwrap{width:min(760px,100%)}
+.mwrap>.sheet{width:100%;max-height:calc(100dvh - 2 * var(--edge) - 50px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+.mclose{position:absolute;z-index:5;top:0;right:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--surface);color:var(--ink);border:3px solid var(--ink);box-shadow:var(--shadow);font-size:1.1rem;font-weight:800;line-height:1;padding:0}
+.mclose:active{transform:scale(.92)}
+
+/* --- fullscreen button (top-left) --- */
+.tb-left{display:flex;align-items:center;gap:8px;min-width:0}
+.fsbtn{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.fsbtn:active{transform:scale(.92)}
+.fsbtn .i-exit,.fsbtn.on .i-enter{display:none}
+.fsbtn.on .i-exit{display:block}
+
+/* --- comic: auto-play bar, dots, tap-to-advance --- */
+.comic .strip{cursor:pointer}
+.comic .panel{font:inherit;color:inherit;cursor:pointer}
+.comic .cprog{height:6px;border-radius:99px;background:var(--track);overflow:hidden;margin:0 0 8px}
+.comic .cprog i{display:block;height:100%;width:0;background:var(--primary);border-radius:99px}
+.comic .cprog.run i{animation:cprog 5s linear forwards}
+@keyframes cprog{from{width:0}to{width:100%}}
+.comic .cdots{display:none;justify-content:center;gap:6px;margin:0 0 8px}
+.comic .cdots i{width:9px;height:9px;border-radius:50%;background:var(--track)}
+.comic .cdots i.on{background:var(--primary)}
+.comic .cfoot{align-items:stretch}
+.comic .cfoot .btn.big{flex:1 1 100%}
+.comic .cfoot .btn.icon{flex:none;min-width:var(--tap);padding:0 14px;font-size:1.2rem}
+.comic .cfoot .btn.skip{flex:1}
+@media (prefers-reduced-motion:reduce){.comic .cprog.run i{animation-duration:5s}}
+
+/* --- phone sizing: smaller type + controls --- */
+@media (max-width:640px),(max-height:520px){
+  :root{--edge:14px;--tap:48px}
+  html[data-band="1"],html[data-band="2"],html[data-band="3"],html[data-band="4"]{--base:15px;--r:18px}
+  .topbar{gap:8px;padding-top:calc(6px + env(safe-area-inset-top,0px));padding-bottom:6px}
+  .fsbtn{width:40px;height:40px;border-radius:12px}
+  .brand i{width:30px;height:30px;border-radius:10px;font-size:1rem}
+  .coins,.timer{padding:4px 12px 4px 6px;font-size:1rem;gap:6px}
+  .coins .c{width:26px;height:26px}
+  .langbtn{padding:0 12px;font-size:.9rem}
+  .nav button{min-height:54px;font-size:.72rem}
+  .nav button .ic{font-size:1.3rem}
+  .title{font-size:1.3rem}
+  .sub{font-size:.86rem;margin-bottom:10px}
+  .btn.big{min-height:58px;font-size:1.1rem}
+  .chip{padding:0 14px;font-size:.86rem}
+  .chip.big{min-height:54px;padding:0 16px}
+  .subject{min-height:76px;padding:10px 6px}
+  .subject .em{font-size:1.6rem}
+  .sj{min-height:128px;padding:12px 12px 10px}
+  .module>button{min-height:58px;padding:10px 12px}
+  .module .em{font-size:1.5rem}
+  .btile{min-height:58px;font-size:1.5rem;padding:0 14px}
+  .react-row .btn{min-height:58px}
+  .clue,.blend .clue{font-size:2.3rem}
+  .wordbig{font-size:1.3rem}
+  .cause{font-size:2rem}
+  .cause .qm{width:44px;height:44px;font-size:1.5rem}
+  .hint{min-height:58px}
+  .ans{min-height:clamp(52px,9vh,66px)}
+  .keys button{min-height:54px;font-size:1.4rem}
+  .gate .q{font-size:2.1rem}
+  .band{min-height:68px;padding:10px 12px}
+  .zhead{min-height:56px;padding:8px 12px}
+  .vopts .btn{min-height:54px;font-size:1.15rem}
+  .vsel{min-height:48px}
+  .item svg{width:70px;height:90px}
+  .enemy svg,.enemy .en-av{width:84px;height:auto}
+  .wl-hero svg{width:96px}
+  .timeup svg{width:96px}
+  .win svg{width:104px}
+  .wstars i{font-size:2.4rem}
+  .win .gain{font-size:1.3rem}
+  .sheet{padding:14px}
+  .sheet h2{font-size:1.2rem}
+  .toast{top:calc(52px + env(safe-area-inset-top,0px));font-size:.85rem}
+  .mwrap{padding-top:46px}
+  .mwrap>.sheet{max-height:calc(100dvh - 2 * var(--edge) - 46px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+  .mclose{width:38px;height:38px}
+
+  .stage-top{top:8px;left:8px;right:8px}
+  .stage-top .chip{min-height:40px;padding:0 12px;font-size:.82rem}
+  .stage-top .chip.static{min-height:32px;font-size:.74rem}
+  .hud{gap:12px;padding-bottom:6px}
+  .qcard{padding:10px 12px}
+  .tmat{min-height:96px}
+  .answers{gap:8px}
+
+  /* comic: one big panel at a time on phones */
+  .comic .strip{display:block}
+  .comic .strip .panel:not(.new),.comic .strip .panel.ghost{display:none}
+  .comic .strip .panel.new{width:100%}
+  .comic .cdots{display:flex}
+  .comic .cap{font-size:.95rem}
+}
+
+.comic .cfoot .btn.icon svg{width:20px;height:20px;display:block;margin:0 auto}
+
+/* portrait phones only: shorter battle stage (landscape keeps the original height so the hero is not cropped) */
+@media (max-width:640px){.stage{height:clamp(168px,23vh,210px)}}
+
+/* ================= v7.2 additions ================= */
+/* battle: close button replaces the Back-to-map chip */
+.stage>.mclose{top:8px;right:8px}
+.stage-top{justify-content:flex-start;padding-right:52px}
+
+/* armory: smaller hero card and shop cards on phones */
+@media (max-width:640px),(max-height:520px){
+  .arm-top{grid-template-columns:minmax(0,104px) 1fr;gap:12px;margin-bottom:10px}
+  .preview{padding:6px}
+  .preview svg,.preview .hero-svg{max-height:120px}
+  .arm-top h2{font-size:1.05rem!important}
+  .arm-top .statline{gap:4px}
+  .arm-top .stat{font-size:.76rem;padding:3px 8px}
+  .arm-top .sub{margin-top:6px!important;font-size:.76rem}
+  .petstrip{padding:8px 10px;margin-bottom:10px}
+  .petstrip .pe{width:54px}
+  .items{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+  .item{padding:8px 6px;gap:3px}
+  .item svg{width:52px;height:68px}
+  .item b{font-size:.8rem;line-height:1.15}
+  .item small{font-size:.66rem}
+  .item .btn{min-height:34px;font-size:.72rem;padding:0 4px}
+}
+
+/* pet haven: smaller room and cards on phones */
+@media (max-width:640px),(max-height:520px){
+  .room{height:clamp(190px,30vh,260px)}
+  .room-win{width:68px;height:68px;border-width:5px}
+  .pcards,.fcards,.tcards{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .pcard,.fcard,.tcard{padding:8px 6px;gap:3px}
+  .pcard .pet-svg{width:60px}
+  .fcard .fe{font-size:1.6rem}
+  .pcard b,.fcard b,.tcard b{font-size:.8rem;line-height:1.15}
+  .pcard small,.fcard small{font-size:.66rem}
+  .pcard .btn,.fcard .btn,.tcard .btn{min-height:34px;font-size:.72rem;padding:0 4px}
+}
+

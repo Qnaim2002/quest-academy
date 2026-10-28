@@ -1,0 +1,16 @@
+{
+  "_about": "Size limits for the built game (npm run budget). Numbers are in KB. If a limit is hit on purpose, raise it here and say why in CHANGELOG.md.",
+  "mainJsKB": 1640,
+  "mainJsGzKB": 575,
+  "cssKB": 270,
+  "cssGzKB": 60,
+  "spriteWorkerKB": 280,
+  "firstLoadGzKB": 625,
+  "lazyChunkKB": 100,
+  "wholeAppKB": 3600,
+  "mustBeLazy": [
+    "kbat",
+    "vfx",
+    "formats"
+  ]
+}

@@ -1,0 +1,29 @@
+# English texts that need no translation or that a native Malay speaker has approved (one per line): Malay food and clothing names, songs, money amounts, units. Added with: npm run lint:bank -- --approve MALAY-REVIEW.csv
+50 sen
+20 sen
+10 sen
+30 sen
+5 sen
+abc
+baju kurung
+nasi lemak
+roti canai
+yang di-pertuan agong
+bunga raya
+16 september
+ukiran kayu
+wayang kulit
+wayang air
+ding dong
+twinkle, twinkle, little star
+row, row, row your boat
+twinkle, twinkle
+piano (p)
+forte (f)
+{n} min
+{n1} has {tot} {th}. {a} of them {isa} big. the rest are small. how many small {th} are there?
+✏️ pen
++5 min
++10 min
+standard (20 s)
+duel {n}

@@ -1,0 +1,169 @@
+/* ================= v4 ================= */
+/* tabs close while a battle is running */
+html[data-battle="1"] .nav{display:none}
+@media (min-width:860px){html[data-battle="1"] .app{grid-template-columns:minmax(0,1fr);grid-template-areas:"top" "main"}}
+.tab.on{animation:tabIn .16s cubic-bezier(.2,.8,.2,1)}
+@keyframes tabIn{from{opacity:0;transform:translateY(10px)}}
+.btn,.chip,.ans,.speak{transition:transform .12s,box-shadow .12s,background .2s}
+@media (hover:hover){.btn:hover,.chip:hover{transform:translateY(-2px)}}
+
+/* studies + armory */
+.subjects{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.lcard{display:flex;align-items:center;gap:8px;min-height:64px;padding:8px 12px;text-align:left;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow)}
+.lcard .em{font-size:1.5rem}
+.lcard .t{flex:1;font-family:var(--font-display);font-size:.95rem;font-weight:800;line-height:1.15}
+.lcard .t small{display:block;font-family:var(--font-body);font-size:.72rem;color:var(--muted);font-weight:700}
+.sheet.lesson .lhead{display:flex;align-items:center;gap:10px}
+.sheet.lesson .lhead h2{flex:1}
+.sheet.lesson .lhead .em{font-size:2rem}
+.sheet.lesson .lbody p{margin:8px 0;font-size:1.05rem;line-height:1.5}
+.sheet.lesson .viz{background:var(--q);border-radius:16px;padding:10px;margin:10px 0}
+.sheet.lesson .listen{display:flex;align-items:center;gap:10px}
+.slotbar{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.slotbar .chip{flex:none;scroll-snap-align:start}
+button.preview{border:0;display:block;width:100%;cursor:pointer}
+.preview .hero-svg{width:100%;height:auto;max-height:270px}
+.item svg{width:84px;height:110px}
+.item .hero-svg *{animation:none!important}
+
+/* ---- character animation ---- */
+.hero-svg .h-torso{transform-box:fill-box;transform-origin:50% 100%;animation:breathe 3.2s ease-in-out infinite}
+.hero-svg .h-head{transform-box:fill-box;transform-origin:50% 90%;animation:headbob 3.2s ease-in-out infinite}
+.hero-svg .h-cape{transform-box:fill-box;transform-origin:50% 0;animation:capesway 2.6s ease-in-out infinite}
+.hero-svg .h-armR{transform-box:view-box;transform-origin:137px 152px;animation:armR 3.2s ease-in-out infinite}
+.hero-svg .h-armL{transform-box:view-box;transform-origin:63px 152px;animation:armL 3.2s ease-in-out infinite;animation-delay:-.5s}
+.hero-svg .h-wingL{transform-box:fill-box;transform-origin:100% 40%;animation:flapL 1.8s ease-in-out infinite}
+.hero-svg .h-wingR{transform-box:fill-box;transform-origin:0 40%;animation:flapR 1.8s ease-in-out infinite}
+.hero-svg .h-eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5s infinite}
+.hero-svg .h-pet{animation:petbob 1.5s ease-in-out infinite}
+.hero-svg .h-pig{transform-box:fill-box;transform-origin:50% 0;animation:sway 2.4s ease-in-out infinite}
+.m-ant,.m-tail,.flame,.twinkle,.rise,.ringspin,.orbit{transform-box:fill-box}
+.m-ant{transform-origin:50% 100%;animation:sway 2.2s ease-in-out infinite}
+.m-tail{transform-origin:0 100%;animation:wag 1.4s ease-in-out infinite}
+.flame{transform-origin:50% 100%;animation:flicker .5s ease-in-out infinite alternate}
+.twinkle{transform-origin:50% 50%;animation:twinkle 1.6s ease-in-out infinite}
+.rise{animation:rise 3s ease-in infinite}
+.ringspin{transform-origin:50% 50%;animation:ringpulse 2s ease-in-out infinite}
+.orbit{transform-box:view-box;transform-origin:100px 154px;animation:spin 6s linear infinite}
+.mon-svg .m-all{transform-box:view-box;transform-origin:140px 206px;animation:mbreathe 2.8s ease-in-out infinite}
+.mon-svg .m-eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 4.6s infinite}
+.mon-svg .m-wingL{transform-box:fill-box;transform-origin:100% 60%;animation:flapL 1.4s ease-in-out infinite}
+.mon-svg .m-wingR{transform-box:fill-box;transform-origin:0 60%;animation:flapR 1.4s ease-in-out infinite}
+.mon-svg .m-halo{transform-box:fill-box;transform-origin:50% 50%;animation:halo 2.4s ease-in-out infinite}
+.mon-svg .m-mouth{transform-box:fill-box;transform-origin:50% 0;animation:mouth 3.4s ease-in-out infinite}
+.o-eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 4.2s infinite}
+@keyframes breathe{50%{transform:scale(1.025,.975)}}
+@keyframes mbreathe{50%{transform:scale(1.03,.96)}}
+@keyframes headbob{50%{transform:translateY(-2px) rotate(-1.5deg)}}
+@keyframes capesway{50%{transform:rotate(3deg) scaleX(1.04)}}
+@keyframes armR{50%{transform:rotate(7deg)}}
+@keyframes armL{50%{transform:rotate(-6deg)}}
+@keyframes flapL{50%{transform:rotate(-14deg) scale(.96)}}
+@keyframes flapR{50%{transform:rotate(14deg) scale(.96)}}
+@keyframes blink{0%,91%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes petbob{50%{transform:translateY(-4px)}}
+@keyframes sway{50%{transform:rotate(7deg)}}
+@keyframes wag{50%{transform:rotate(14deg)}}
+@keyframes flicker{to{transform:scale(1.12,1.2) rotate(4deg)}}
+@keyframes twinkle{50%{transform:scale(1.6) rotate(20deg);opacity:.5}}
+@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-110px);opacity:0}}
+@keyframes ringpulse{50%{transform:scale(1.12,1.2);opacity:.6}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes halo{50%{transform:translateY(-5px) scaleX(1.06)}}
+@keyframes mouth{50%{transform:scaleY(1.22)}}
+/* fight poses (class on the sprite, or on any wrapper) */
+.pose-attack .h-armR{animation:swing .72s cubic-bezier(.3,.1,.2,1) 1!important}
+.pose-attack .h-torso{animation:lean .72s ease-in-out 1!important}
+.pose-hurt .h-eyes,.pose-hurt .m-eyes{display:none}
+.pose-hurt .h-eyes-x,.pose-hurt .m-eyes-x{display:block!important}
+.pose-hurt .h-head{animation:hurtHead .5s ease-out 1!important}
+.pose-hurt .m-all{animation:monhurt .5s ease-out 1!important}
+.pose-block .h-armL{animation:blockUp .72s ease-out 1!important}
+.pose-cheer .h-armR{animation:cheerR .42s ease-in-out 3!important}
+.pose-cheer .h-armL{animation:cheerL .42s ease-in-out 3!important}
+.pose-cheer .h-torso,.pose-cheer .h-head{animation:cheerJump .42s ease-in-out 3!important}
+@keyframes swing{0%{transform:rotate(0)}26%{transform:rotate(62deg)}56%{transform:rotate(-100deg)}100%{transform:rotate(0)}}
+@keyframes lean{26%{transform:rotate(-5deg) scale(.98,1.02)}56%{transform:rotate(7deg) translateX(4px)}100%{transform:none}}
+@keyframes hurtHead{0%{transform:rotate(0)}25%{transform:rotate(-9deg) translateX(-4px)}60%{transform:rotate(5deg)}100%{transform:none}}
+@keyframes monhurt{0%{transform:none}25%{transform:rotate(8deg) scale(.95,1.06)}60%{transform:rotate(-5deg)}100%{transform:none}}
+@keyframes blockUp{0%{transform:rotate(0)}30%,70%{transform:rotate(-72deg) scale(1.15)}100%{transform:rotate(0)}}
+@keyframes cheerR{50%{transform:rotate(-168deg)}0%,100%{transform:rotate(-142deg)}}
+@keyframes cheerL{50%{transform:rotate(168deg)}0%,100%{transform:rotate(142deg)}}
+@keyframes cheerJump{50%{transform:translateY(-16px)}}
+
+/* ---- stage, scenery and fight FX ---- */
+.stage{height:clamp(190px,30vh,280px)}
+.scenery{position:absolute;inset:0;z-index:0;overflow:hidden}
+.sc-far{position:absolute;left:-6%;right:-6%;top:0;height:52%;animation:drift 38s ease-in-out infinite alternate}
+.sc-near{position:absolute;left:0;right:0;bottom:0;height:64%}
+.scenery svg{width:100%;height:100%;display:block}
+@keyframes drift{to{transform:translateX(5%)}}
+.sprite{bottom:3%;width:clamp(100px,27%,180px);will-change:transform}
+.sprite.monster{width:clamp(110px,29%,190px)}
+.sprite.monster.boss{width:clamp(135px,35%,235px)}
+.sprite>svg{animation:none;width:100%;height:auto;overflow:visible}
+.sprite.hero{left:7%}
+.sprite.monster{right:6%}
+.fx{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.fxp{position:absolute;font-size:1.3rem;will-change:transform}
+.fxslash{position:absolute;width:120px;height:120px;transform:translate(-50%,-50%);overflow:visible;filter:drop-shadow(0 0 6px rgba(255,255,255,.9))}
+.fxring{position:absolute;width:60px;height:60px;border:5px solid #9fe8ff;border-radius:50%;box-shadow:0 0 18px currentColor}
+.fxflash{position:absolute;inset:0;z-index:6;pointer-events:none}
+.fxnum{position:absolute;transform:translate(-50%,0);font-family:var(--font-display);font-weight:800;font-size:1.8rem;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.4),0 0 12px rgba(0,0,0,.35);white-space:nowrap;pointer-events:none}
+.fxnum.crit{font-size:2.5rem;color:#FFD166}
+.fxnum.combo{font-size:1.4rem;color:#FF8FB1}
+.fxnum.safe{color:#BFFFEA;font-size:1.3rem}
+.fxnum.warn{font-size:2.2rem}
+.flycoin{position:fixed;left:0;top:0;z-index:95;pointer-events:none;font-size:1.5rem}
+.stage.hitstop *{animation-play-state:paused!important}
+.hud-side .bar i{transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.bar.mon i{transition:width .7s cubic-bezier(.2,.8,.2,1) .15s}
+
+/* ---- word card + new challenge visuals ---- */
+.wcard{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:linear-gradient(135deg,var(--surface2),var(--surface));border-radius:16px;padding:10px 14px;margin:6px 0;animation:drop .3s}
+.wmain{display:flex;flex-direction:column;min-width:0}
+.wlabel{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.wtxt{font-family:var(--font-display);font-size:2.3rem;font-weight:800;letter-spacing:.06em;line-height:1.1;overflow-wrap:anywhere}
+.wtxt.masked{color:var(--muted);letter-spacing:.18em}
+.wbtns{display:flex;gap:8px;align-items:center}
+.wordbig.big{font-size:2.4rem}
+.wordbig .end{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.clue.big{font-size:4.4rem;padding:6px 0}
+.clue.glowp{animation:pulse 1.2s ease-in-out infinite;filter:drop-shadow(0 0 10px var(--accent))}
+.slot.q{border-color:var(--accent);color:var(--accent)}
+
+/* ---- map: six worlds, snake paths ---- */
+.world{position:relative}
+.worlds{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+@keyframes nodeIn{from{opacity:0;transform:scale(.6) translateY(10px)}}
+.lname{font-size:.7rem;font-weight:800;text-align:center;line-height:1.15;color:var(--ink);padding:0 2px;max-width:100%}
+.herostrip{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;background:var(--surface);border-radius:var(--r);padding:10px 14px;box-shadow:var(--shadow);margin-bottom:12px}
+.hs-av{width:62px;height:82px}.hs-av svg{width:100%;height:100%}
+.hs-info b{font-family:var(--font-display);font-size:1.15rem}
+.hs-info small,.dq small{color:var(--muted);font-size:.78rem}
+.xp{height:10px;border-radius:99px;background:var(--track);overflow:hidden;margin:4px 0}
+.xp i{display:block;height:100%;background:var(--hp-hero);border-radius:99px;transition:width .6s}
+.win-av{display:flex;justify-content:center;align-items:flex-end;gap:6px}
+.win-av .wa-h svg{width:92px;height:auto;margin:0}
+.win-av .wa-m svg{width:130px;height:auto;margin:0}
+
+/* ---- 6-digit parent code ---- */
+.pdots{display:flex;justify-content:center;gap:14px;margin:14px 0 6px}
+.pd{width:22px;height:22px;border-radius:50%;border:3px solid var(--ink);display:block;transition:background .15s,transform .15s}
+.pd.on{background:var(--primary);border-color:var(--primary);transform:scale(1.15)}
+.gate.shake .pdots{animation:wiggle .5s}
+.pmsg{min-height:1.5em;font-weight:800;color:var(--accent);margin:4px 0 10px}
+.keys button.go{background:var(--surface2);color:var(--ink)}
+
+/* ---- welcome + leave dialogs ---- */
+#welcomeOverlay{z-index:80}
+#leaveOverlay{z-index:70}
+.wl-hero svg{width:120px;margin:0 auto}
+#welcomeSheet{text-align:center}
+#welcomeSheet .seg{justify-content:center}
+.lv-actions{display:grid;gap:10px;margin-top:14px}
+@media (prefers-reduced-motion:reduce){.fx,.fxp{display:none}}
+html[data-sensory="1"] .scenery{opacity:.6}
+html[data-sensory="1"] .fx{display:none}
+
